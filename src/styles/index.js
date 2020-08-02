@@ -22,13 +22,17 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html {
-    
+    font-size: 50%;
+
+    @media ${device.tablet} {
+      font-size: 62.5%;
+    }
   }
   
  body {
     width: 100%;
     height: 100%;
-    font-size: 16px;
+    font-size: 1.6rem;
     min-height: 100%;
     font-family: "Poppins", sans-serif;
     -webkit-font-smoothing: antialiased;

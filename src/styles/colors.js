@@ -1,6 +1,5 @@
 export default {
-  pri: "#006699",
-  white: "#fff",
-  black: "#393939",
-  error: "#f84f31"
+  primary: "#3A3276",
+  white: "#ffffff",
+  black: "#000"
 };

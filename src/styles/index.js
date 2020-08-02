@@ -15,37 +15,25 @@ export const device = {
 };
 
 const GlobalStyles = createGlobalStyle`
-.js-focus-visible :focus:not([data-focus-visible-added]) {
-  outline: none;
-  box-shadow: none;
-}
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+  .js-focus-visible :focus:not([data-focus-visible-added]) {
+    outline: none;
+    box-shadow: none;
+  }
 
-html, body {
-  margin: 0;
-  padding: 0;
+  html, body {
   width: 100%;
-  height: 100%;
-  font-size: 16px;
-  min-height: 100%;
-  background-color: #f3f5fc;
-  font-family: "upgrade", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  outline: none;
-}
+    height: 100%;
+    font-size: 16px;
+    min-height: 100%;
+    font-family: "Poppins", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    outline: none;
+  }
 
-p,
-a {
-  font-size: 0.875rem;
-  font-family: "upgrade", sans-serif;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-ul {
-  list-style-type: none;
-}
+  ul {
+    list-style-type: none;
+  }
 `;
 
 export default GlobalStyles;

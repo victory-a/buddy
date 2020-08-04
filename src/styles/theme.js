@@ -1,23 +1,19 @@
 import { theme } from "@chakra-ui/core";
 import colors from "./colors";
 
-const breakpoints = ["320px", "375px", "425px", "768px", "1025px", "1441px", "2561px"];
+const breakpoints = ["375px", "768px", "1025px", "1441px"];
 
-breakpoints.mobileS = breakpoints[0];
-breakpoints.mobileM = breakpoints[1];
-breakpoints.mobileL = breakpoints[2];
-breakpoints.tablet = breakpoints[3];
-breakpoints.laptop = breakpoints[4];
-breakpoints.laptopL = breakpoints[5];
-breakpoints.desktop = breakpoints[6];
+breakpoints.mobile = breakpoints[0];
+breakpoints.tablet = breakpoints[1];
+breakpoints.laptop = breakpoints[2];
+breakpoints.desktop = breakpoints[3];
 
 export default {
   ...theme,
   breakpoints,
   fonts: {
-    heading: "'upgrade-lights', sans-serif",
-    body: "'upgrade', sans-serif",
-    mono: "'upgrade-lights',sans-serif"
+    heading: "'Indie Flower', cursive, sans-serif",
+    body: "'Raleway', sans-serif"
   },
   fontSizes: {
     xs: "0.75rem",
@@ -33,7 +29,7 @@ export default {
   },
   colors: {
     ...theme.colors,
-    aella: {
+    buddy: {
       ...colors
     }
   }

@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect, lazy, Suspense } from "react";
+import { FullPageSpinner } from "components/loaders.js";
+
+const loadAuthenticatedApp = () => import("app/authenticatedApp");
+const AuthenticatedApp = lazy(loadAuthenticatedApp);
+
+const UnauthenticatedApp = lazy(() => import("app/unauthenticatedApp"));
 
 function App() {
+  let user = null;
+
+  // load authenticated app in bg while user completes auth form
+  useEffect(() => {
+    loadAuthenticatedApp();
+  }, []);
+
   return (
-    <div>
-      <p>Hello world</p>
-    </div>
+    <Suspense fallback={<FullPageSpinner />}>
+      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+    </Suspense>
   );
 }
 

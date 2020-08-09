@@ -12,8 +12,8 @@ export default {
   ...theme,
   breakpoints,
   fonts: {
-    heading: "'Indie Flower', cursive, sans-serif",
-    body: "'Raleway', sans-serif"
+    heading: "'Raleway', sans-serif",
+    body: "'Poppins', sans-serif"
   },
   fontSizes: {
     xs: "0.75rem",

@@ -15,7 +15,6 @@ export const device = {
 };
 
 const GlobalStyles = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Raleway:wght@400;500&display=swap');
   .js-focus-visible :focus:not([data-focus-visible-added]) {
     outline: none;
     box-shadow: none;
@@ -34,7 +33,7 @@ const GlobalStyles = createGlobalStyle`
     height: 100%;
     font-size: 1.6rem;
     min-height: 100%;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     outline: none;
   }

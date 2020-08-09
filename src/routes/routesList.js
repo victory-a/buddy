@@ -37,7 +37,7 @@ const routes = [
     path: "*",
     exact: true,
     isPrivate: false,
-    component: Login
+    component: () => <Redirect to="/" />
   },
   {
     path: "/",

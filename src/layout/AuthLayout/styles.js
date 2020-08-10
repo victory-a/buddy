@@ -96,6 +96,19 @@ const Description = styled.p`
   text-align: center;
 `;
 
+const InlineFields = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media ${device.tablet} {
+    flex-direction: row;
+
+    div:first-child {
+      margin-right: 4%;
+    }
+  }
+`;
+
 const FormWrapper = styled.div`
   margin-top: 2rem;
 `;
@@ -124,5 +137,6 @@ export {
   TitleContainer,
   Description,
   FormWrapper,
-  FormFooter
+  FormFooter,
+  InlineFields
 };

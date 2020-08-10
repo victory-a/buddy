@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 
-const validateName = () => Yup.string().required("name is required");
+const validateLastName = () => Yup.string().required("last name is required");
+const validateFirstName = () => Yup.string().required("first name is required");
 const validateEmail = () =>
   Yup.string()
     .email("enter a valid email")
@@ -22,8 +23,8 @@ export const signInSchema = () =>
 
 export const createAccountSchema = () =>
   Yup.object().shape({
-    firstName: validateName(),
-    lastName: validateName(),
+    firstName: validateFirstName(),
+    lastName: validateLastName(),
     email: validateEmail(),
     password: validatePassword()
   });

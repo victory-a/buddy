@@ -12,6 +12,7 @@ import {
   Title,
   Description,
   FormWrapper,
+  InlineFields,
   FormFooter
 } from "layout/AuthLayout/styles";
 
@@ -41,6 +42,10 @@ const CreateAccount = () => {
       >
         {({ isSubmitting, isValid }) => (
           <FormWrapper onSubmit={handleSubmit}>
+            <InlineFields>
+              <TextInput name="firstName" placeholder="david" title="First name" />
+              <TextInput name="lastName" placeholder="ekezie" title="Last name" />
+            </InlineFields>
             <TextInput
               name="email"
               type="email"

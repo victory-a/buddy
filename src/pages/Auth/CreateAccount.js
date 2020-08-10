@@ -1,18 +1,65 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useLayoutEffect } from "react";
+import { Formik } from "formik";
 import { Link } from "react-router-dom";
-import { Title, Description, FormWrapper, FormFooter } from "layout/AuthLayout/styles";
+import TextInput from "components/TextInput";
+import Button from "components/Button";
+import { Spinner } from "components/loaders.js";
+import PasswordInput from "components/TextInput/PasswordInput";
+import { createAccountSchema } from "utils/validationSchema";
+
+import {
+  TitleContainer,
+  Title,
+  Description,
+  FormWrapper,
+  FormFooter
+} from "layout/AuthLayout/styles";
+
+const initialValues = {
+  email: "",
+  password: ""
+};
 
 const CreateAccount = () => {
+  useLayoutEffect(() => {
+    document.title = "Buddy | Create Account";
+  }, []);
+
+  function handleSubmit() {}
+
   return (
     <Fragment>
-      <Title>Create an Account</Title>
-      <Description>Set up your account and connect with your sure G's</Description>
+      <TitleContainer>
+        <Title>Create an Account</Title>
+        <Description>Set up your account and connect with your sure G's</Description>
+      </TitleContainer>
 
-      <FormWrapper></FormWrapper>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={createAccountSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, isValid }) => (
+          <FormWrapper onSubmit={handleSubmit}>
+            <TextInput
+              name="email"
+              type="email"
+              placeholder="ekeziedavid@gmail.com"
+              title="Email Address"
+            />
+
+            <PasswordInput name="password" title="Password" />
+
+            <Button type="submit" disabled={isSubmitting || !isValid}>
+              {isSubmitting ? <Spinner /> : "Create Account"}
+            </Button>
+          </FormWrapper>
+        )}
+      </Formik>
 
       <FormFooter>
         <p>
-          Have an account?<Link to="/">Sign In.</Link>
+          Have an account? <Link to="/">Sign In.</Link>
         </p>
       </FormFooter>
     </Fragment>

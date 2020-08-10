@@ -14,7 +14,8 @@ const BackgroundContainer = styled.div`
   top: 0;
   left: 0;
   background-image: url(${patterns});
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   height: 40rem;
   width: 100%;
   opacity: 0.8;
@@ -64,22 +65,31 @@ const Logo = styled.h1`
 const AuthFormContainer = styled.div`
   align-self: center;
   width: 100%;
-  max-width: 70rem;
+  max-width: 55rem;
   border-radius: 6px;
-  padding: 3.5rem;
+  padding: 2rem;
   margin-top: 3rem;
   border: 0.5px solid rgba(18, 39, 140, 0.3);
+
+  @media ${device.tablet} {
+    padding: 4rem;
+  }
 `;
 
 // form componet styles
+const TitleContainer = styled.div`
+  margin-bottom: 2.8rem;
+`;
+
 const Title = styled.h2`
   color: ${colors.blue};
   font-family: "Raleway", sans-serif;
   font-weight: bold;
   font-size: 2.6rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   line-height: 1;
   text-align: center;
+  letter-spacing: 2px;
 `;
 
 const Description = styled.p`
@@ -97,6 +107,9 @@ const FormFooter = styled.div`
     color: ${colors.blue};
     font-weight: 400;
   }
+  p {
+    margin-bottom: 1rem;
+  }
 `;
 
 export {
@@ -108,6 +121,7 @@ export {
   Logo,
   AuthFormContainer,
   Title,
+  TitleContainer,
   Description,
   FormWrapper,
   FormFooter

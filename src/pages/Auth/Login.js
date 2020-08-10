@@ -1,14 +1,56 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useLayoutEffect } from "react";
+import { Formik } from "formik";
 import { Link } from "react-router-dom";
-import { Title, Description, FormWrapper, FormFooter } from "layout/AuthLayout/styles";
+import TextInput from "components/TextInput";
+import Button from "components/Button";
+import { Spinner } from "components/loaders.js";
+import PasswordInput from "components/TextInput/PasswordInput";
+import { signInSchema } from "utils/validationSchema";
+import {
+  TitleContainer,
+  Title,
+  Description,
+  FormWrapper,
+  FormFooter
+} from "layout/AuthLayout/styles";
+
+const initialValues = {
+  email: "",
+  password: ""
+};
 
 const Login = () => {
+  useLayoutEffect(() => {
+    document.title = "Buddy | Login";
+  }, []);
+
+  function handleSubmit() {}
+
   return (
     <Fragment>
-      <Title>Welcome Back</Title>
-      <Description>Sign into your buddy account</Description>
+      <TitleContainer>
+        <Title>Welcome Back</Title>
+        <Description>Sign into your buddy account</Description>
+      </TitleContainer>
 
-      <FormWrapper></FormWrapper>
+      <Formik initialValues={initialValues} validationSchema={signInSchema} onSubmit={handleSubmit}>
+        {({ isSubmitting, isValid }) => (
+          <FormWrapper onSubmit={handleSubmit}>
+            <TextInput
+              name="email"
+              type="email"
+              placeholder="ekeziedavid@gmail.com"
+              title="Email Address"
+            />
+
+            <PasswordInput name="password" title="Password" />
+
+            <Button type="submit" disabled={isSubmitting || !isValid}>
+              {isSubmitting ? <Spinner /> : "Login"}
+            </Button>
+          </FormWrapper>
+        )}
+      </Formik>
 
       <FormFooter>
         <p>

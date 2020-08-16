@@ -9,7 +9,7 @@ import {
   AuthFormContainer
 } from "./styles";
 import { Link } from "react-router-dom";
-import friends from "assets/auth-bg.jpg";
+// import friends from "assets/auth-bg.jpg";
 
 const AuthLayout = ({ children }) => {
   return (

@@ -6,6 +6,8 @@ import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
 import PasswordInput from "components/TextInput/PasswordInput";
 import { signInSchema } from "utils/validationSchema";
+import { login } from "lib/auth-client";
+
 import {
   TitleContainer,
   Title,
@@ -24,7 +26,14 @@ const Login = () => {
     document.title = "Buddy | Login";
   }, []);
 
-  function handleSubmit() {}
+  async function handleSubmit(values) {
+    try {
+      const data = await login(values);
+      // console.log(data);
+    } catch (error) {
+      // console.log(error);
+    }
+  }
 
   return (
     <Fragment>
@@ -34,7 +43,7 @@ const Login = () => {
       </TitleContainer>
 
       <Formik initialValues={initialValues} validationSchema={signInSchema} onSubmit={handleSubmit}>
-        {({ isSubmitting, isValid }) => (
+        {({ handleSubmit, isSubmitting, isValid }) => (
           <FormWrapper onSubmit={handleSubmit}>
             <TextInput
               name="email"

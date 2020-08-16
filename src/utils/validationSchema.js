@@ -8,7 +8,7 @@ const validateEmail = () =>
     .required("email is required");
 const validatePassword = () =>
   Yup.string()
-    .min(4, "should be atleast 4 characters")
+    .min(3, "should be atleast 3 characters")
     .required("password is required");
 const confirmPassword = () =>
   Yup.string()

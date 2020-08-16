@@ -109,7 +109,7 @@ const InlineFields = styled.div`
   }
 `;
 
-const FormWrapper = styled.div`
+const FormWrapper = styled.form`
   margin-top: 2rem;
 `;
 

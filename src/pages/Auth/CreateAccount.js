@@ -6,6 +6,7 @@ import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
 import PasswordInput from "components/TextInput/PasswordInput";
 import { createAccountSchema } from "utils/validationSchema";
+import { register } from "lib/auth-client";
 
 import {
   TitleContainer,
@@ -17,6 +18,8 @@ import {
 } from "layout/AuthLayout/styles";
 
 const initialValues = {
+  firstName: "",
+  lastName: "",
   email: "",
   password: ""
 };
@@ -26,7 +29,14 @@ const CreateAccount = () => {
     document.title = "Buddy | Create Account";
   }, []);
 
-  function handleSubmit() {}
+  async function handleSubmit(values) {
+    try {
+      const data = await register(values);
+      // console.log(data);
+    } catch (error) {
+      // console.log(error);
+    }
+  }
 
   return (
     <Fragment>
@@ -40,7 +50,7 @@ const CreateAccount = () => {
         validationSchema={createAccountSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, isValid }) => (
+        {({ handleSubmit, isSubmitting, isValid }) => (
           <FormWrapper onSubmit={handleSubmit}>
             <InlineFields>
               <TextInput name="firstName" placeholder="david" title="First name" />

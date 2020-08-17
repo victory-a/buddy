@@ -13,13 +13,14 @@ const queryConfig = {
     retry: 0,
     throwOnError: false,
     useErrorBoundary: false,
-    // refetchAllOnWindowFocus: false,
     refetchOnWindowFocus: false
   }
 };
 
 ReactDOM.render(
   <>
+    <ReactQueryDevtools initialIsOpen={false} />
+
     <ReactQueryConfigProvider config={queryConfig}>
       <GlobalStyles />
 
@@ -31,8 +32,6 @@ ReactDOM.render(
         </AuthProvider>
       </ThemeProvider>
     </ReactQueryConfigProvider>
-
-    <ReactQueryDevtools />
   </>,
 
   document.getElementById("root")

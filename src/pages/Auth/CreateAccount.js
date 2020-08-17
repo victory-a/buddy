@@ -1,5 +1,5 @@
 import React, { Fragment, useLayoutEffect } from "react";
-import { queryCache } from "react-query";
+import { queryCache, useMutation } from "react-query";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import TextInput from "components/TextInput";
@@ -8,6 +8,7 @@ import { Spinner } from "components/loaders.js";
 import PasswordInput from "components/TextInput/PasswordInput";
 import { createAccountSchema } from "utils/validationSchema";
 import { register } from "lib/auth-client";
+import { ShowError } from "components/ShowError/ShowError";
 
 import {
   TitleContainer,
@@ -30,15 +31,12 @@ const CreateAccount = () => {
     document.title = "Buddy | Create Account";
   }, []);
 
-  async function handleSubmit(values) {
-    try {
-      const response = await register(values);
-      await queryCache.invalidateQueries("user");
+  const [mutate, { status, error }] = useMutation(register);
 
-      // console.log(response);
-    } catch (error) {
-      // console.log(error);
-    }
+  async function handleSubmit(values) {
+    await mutate(values, {
+      onSuccess: async () => await queryCache.invalidateQueries("user")
+    });
   }
 
   return (
@@ -68,8 +66,15 @@ const CreateAccount = () => {
 
             <PasswordInput name="password" title="Password" />
 
-            <Button type="submit" disabled={isSubmitting || !isValid}>
-              {isSubmitting ? <Spinner /> : "Create Account"}
+            <ShowError
+              status={status}
+              error={
+                error === "Duplicate field value entered" ? "user with email already exists" : error
+              }
+            />
+
+            <Button type="submit" disabled={status === "loading" || isSubmitting || !isValid}>
+              {status === "loading" || isSubmitting ? <Spinner /> : "Create Account"}
             </Button>
           </FormWrapper>
         )}

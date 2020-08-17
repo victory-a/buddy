@@ -1,4 +1,5 @@
 import React, { Fragment, useLayoutEffect } from "react";
+import { queryCache, useMutation } from "react-query";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import TextInput from "components/TextInput";
@@ -6,6 +7,9 @@ import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
 import { forgotPasswordSchema } from "utils/validationSchema";
 import { forgotPassword } from "lib/auth-client";
+import useCustomToast from "hooks/useCustomToast";
+import { ShowError } from "components/ShowError/ShowError";
+
 import {
   Title,
   TitleContainer,
@@ -19,17 +23,19 @@ const initialValues = {
 };
 
 const ForgotPassword = () => {
+  const { doToast } = useCustomToast();
   useLayoutEffect(() => {
     document.title = "Buddy | Forgot Password";
   }, []);
 
+  const [mutate, { status, error }] = useMutation(forgotPassword);
+
   async function handleSubmit(values) {
-    try {
-      const response = await forgotPassword(values);
-      // console.log(response);
-    } catch (error) {
-      // console.log(error);
-    }
+    await mutate(values, {
+      onSuccess: async () => {
+        doToast("Reset password token sent!", "Check your mail for password reset link");
+      }
+    });
   }
 
   return (
@@ -53,8 +59,10 @@ const ForgotPassword = () => {
               title="Email Address"
             />
 
-            <Button type="submit" disabled={isSubmitting || !isValid}>
-              {isSubmitting ? <Spinner /> : "Continue"}
+            <ShowError status={status} error={error} />
+
+            <Button type="submit" disabled={status === "loading" || isSubmitting || !isValid}>
+              {status === "loading" || isSubmitting ? <Spinner /> : "Continue"}
             </Button>
           </FormWrapper>
         )}

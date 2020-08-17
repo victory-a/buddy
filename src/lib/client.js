@@ -24,3 +24,13 @@ export default async function client(endpoint, { body, ...customConfig } = {}) {
   const { data } = await axios(`${config.BASE_URL}/${endpoint}`, params);
   return data;
 }
+
+/** Axios interceptors to transform error message for clientFn */
+axios.interceptors.response.use(
+  function(response) {
+    return response;
+  },
+  function(error) {
+    return Promise.reject(error.response.data.error);
+  }
+);

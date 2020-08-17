@@ -1,5 +1,5 @@
 import React, { Fragment, useLayoutEffect } from "react";
-import { queryCache } from "react-query";
+import { queryCache, useMutation } from "react-query";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import TextInput from "components/TextInput";
@@ -8,6 +8,7 @@ import { Spinner } from "components/loaders.js";
 import PasswordInput from "components/TextInput/PasswordInput";
 import { signInSchema } from "utils/validationSchema";
 import { login } from "lib/auth-client";
+import { ShowError } from "components/ShowError/ShowError";
 
 import {
   TitleContainer,
@@ -27,13 +28,12 @@ const Login = () => {
     document.title = "Buddy | Login";
   }, []);
 
+  const [mutate, { status, error }] = useMutation(login);
+
   async function handleSubmit(values) {
-    try {
-      const response = await login(values);
-      await queryCache.invalidateQueries("user");
-    } catch (error) {
-      // console.log(error);
-    }
+    await mutate(values, {
+      onSuccess: async () => await queryCache.invalidateQueries("user")
+    });
   }
 
   return (
@@ -55,8 +55,13 @@ const Login = () => {
 
             <PasswordInput name="password" title="Password" />
 
-            <Button type="submit" disabled={isSubmitting || !isValid}>
-              {isSubmitting ? <Spinner /> : "Login"}
+            <ShowError
+              status={status}
+              error={error === "Invalid credentials" ? "email or password incorrect" : error}
+            />
+
+            <Button type="submit" disabled={status === "loading" || isSubmitting || !isValid}>
+              {status === "loading" || isSubmitting ? <Spinner /> : "Login"}
             </Button>
           </FormWrapper>
         )}

@@ -58,23 +58,6 @@ async function handleUserResoponse({ token }) {
   }
 }
 
-function fetchUserDetails() {
-  return queryCache.getQueryData("user");
-}
-
-// synchronize the current user object value (if any) with the user value from authContext
-function useUserDetails() {
-  let user = null;
-  const { data, status } = useQuery({
-    queryKey: "userDetails",
-    queryFn: fetchUserDetails
-  });
-
-  if (data) user = data.user;
-
-  return { user, status };
-}
-
 async function register(payload) {
   const response = await client("auth/register", { body: payload });
   return handleUserResoponse(response);
@@ -89,16 +72,33 @@ async function forgotPassword(payload) {
   return await client("auth/forgotpassword", { body: payload });
 }
 
-async function resetPassword(payload, resetToken) {
+async function resetPassword(payload) {
+  const [data, resetToken] = payload;
+
   return await client(`auth/resetpassword/${resetToken}`, {
-    body: payload,
-    method: "PATCH"
+    body: data,
+    method: "PUT"
   });
 }
 
 function logout() {
   Cookies.remove(config.TOKEN);
   return Promise.resolve();
+}
+
+// react query utils
+function fetchUserDetails() {
+  return queryCache.getQueryData("user");
+}
+
+// synchronize the current user object value (if any) with the user value from authContext
+function useUserDetails() {
+  let user;
+  const { data, status } = useQuery("userDetails", fetchUserDetails);
+
+  if (data) user = data.user;
+  else user = null;
+  return { user, status };
 }
 
 export {

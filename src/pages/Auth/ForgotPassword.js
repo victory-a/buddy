@@ -5,6 +5,7 @@ import TextInput from "components/TextInput";
 import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
 import { forgotPasswordSchema } from "utils/validationSchema";
+import { forgotPassword } from "lib/auth-client";
 import {
   Title,
   TitleContainer,
@@ -14,8 +15,7 @@ import {
 } from "layout/AuthLayout/styles";
 
 const initialValues = {
-  email: "",
-  password: ""
+  email: ""
 };
 
 const ForgotPassword = () => {
@@ -23,7 +23,14 @@ const ForgotPassword = () => {
     document.title = "Buddy | Forgot Password";
   }, []);
 
-  function handleSubmit() {}
+  async function handleSubmit(values) {
+    try {
+      const response = await forgotPassword(values);
+      // console.log(response);
+    } catch (error) {
+      // console.log(error);
+    }
+  }
 
   return (
     <Fragment>
@@ -37,7 +44,7 @@ const ForgotPassword = () => {
         validationSchema={forgotPasswordSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, isValid }) => (
+        {({ handleSubmit, isSubmitting, isValid }) => (
           <FormWrapper onSubmit={handleSubmit}>
             <TextInput
               name="email"

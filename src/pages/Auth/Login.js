@@ -1,4 +1,5 @@
 import React, { Fragment, useLayoutEffect } from "react";
+import { queryCache } from "react-query";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import TextInput from "components/TextInput";
@@ -28,8 +29,8 @@ const Login = () => {
 
   async function handleSubmit(values) {
     try {
-      const data = await login(values);
-      // console.log(data);
+      const response = await login(values);
+      await queryCache.invalidateQueries("user");
     } catch (error) {
       // console.log(error);
     }

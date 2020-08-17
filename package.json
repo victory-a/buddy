@@ -13,6 +13,7 @@
     "emotion-theming": "^10.0.27",
     "formik": "^2.1.5",
     "js-cookie": "^2.2.1",
+    "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-error-boundary": "^2.3.1",

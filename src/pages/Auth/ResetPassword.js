@@ -1,11 +1,12 @@
 import React, { Fragment, useLayoutEffect } from "react";
 import { Formik } from "formik";
-// import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PasswordInput from "components/TextInput/PasswordInput";
 import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
 import { resetPasswordSchema } from "utils/validationSchema";
 import { Title, TitleContainer, Description, FormWrapper } from "layout/AuthLayout/styles";
+import { resetPassword } from "lib/auth-client";
 
 const initialValues = {
   newPassword: "",
@@ -13,11 +14,19 @@ const initialValues = {
 };
 
 const ResetPassword = () => {
+  let { resetToken } = useParams();
   useLayoutEffect(() => {
     document.title = "Buddy | Reset Password";
   }, []);
 
-  function handleSubmit() {}
+  async function handleSubmit(values) {
+    try {
+      const response = await resetPassword(values, resetToken);
+      // console.log(response);
+    } catch (error) {
+      // console.log(error);
+    }
+  }
 
   return (
     <Fragment>
@@ -31,7 +40,7 @@ const ResetPassword = () => {
         validationSchema={resetPasswordSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, isValid }) => (
+        {({ handleSubmit, isSubmitting, isValid }) => (
           <FormWrapper onSubmit={handleSubmit}>
             <PasswordInput name="newPassword" title="Password" />
             <PasswordInput name="confirmPassword" title="Confirm Password" />

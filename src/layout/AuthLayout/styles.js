@@ -52,7 +52,7 @@ const Container = styled.div`
 `;
 
 const Logo = styled.h1`
-  color: ${colors.blue};
+  color: ${colors.primary};
   font-size: 2.8rem;
   font-weight: bold;
   text-align: center;
@@ -82,7 +82,7 @@ const TitleContainer = styled.div`
 `;
 
 const Title = styled.h2`
-  color: ${colors.blue};
+  color: ${colors.primary};
   font-family: "Raleway", sans-serif;
   font-weight: bold;
   font-size: 2.6rem;
@@ -117,7 +117,7 @@ const FormFooter = styled.div`
   text-align: center;
 
   a {
-    color: ${colors.blue};
+    color: ${colors.primary};
     font-weight: 400;
   }
   p {

@@ -4,7 +4,7 @@ import colors from "styles/colors";
 const Button = styled.button`
   height: fit-content;
   color: ${colors.white};
-  background-color: ${colors.blue};
+  background-color: ${colors.primary};
   border-radius: 5px;
   width: 100%;
   padding: 1.5rem 0;

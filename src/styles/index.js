@@ -1,7 +1,8 @@
 import { createGlobalStyle } from "styled-components";
+import colors from "./colors";
 
 const size = {
-  mobile: "375px",
+  mobile: "425px",
   tablet: "768px",
   laptop: "1025px",
   desktop: "1441px"
@@ -36,6 +37,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     outline: none;
+    color: ${colors.primary};
   }
 
   ul {

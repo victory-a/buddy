@@ -4,9 +4,14 @@ import { device } from "styles";
 
 const Container = styled.main`
   display: flex;
+  flex-direction: column;
   width: 100%;
   min-height: 100%;
   background-color: #fff;
+
+  @media ${device.mobile} {
+    flex-direction: row;
+  }
 `;
 
 const NavigationWrapper = styled.div`
@@ -34,7 +39,8 @@ const MainContentWrapper = styled.div`
   flex: 1;
   min-height: 100vh;
   padding: 1rem;
-  background-color: palevioletred;
+  border-left: 0.5px solid rgba(18, 39, 140, 0.1);
+  /* background-color: palevioletred; */
 `;
 
 export { Container, NavigationWrapper, MainContentWrapper };

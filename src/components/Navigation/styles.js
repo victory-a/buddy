@@ -2,6 +2,19 @@ import styled from "styled-components";
 import { device } from "styles";
 import colors from "styles/colors";
 
+const MobileNavContainer = styled.div`
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & .burger-menu {
+    padding: 0.3rem;
+  }
+`;
+
 const NavListContainer = styled.nav`
   display: flex;
   flex-direction: column;
@@ -11,7 +24,7 @@ const NavLogoContainer = styled.div`
   display: flex;
   margin-bottom: 1rem;
   justify-content: center;
-  margin: 4rem 0;
+  margin: 2rem 0 4rem 0;
 
   svg {
     width: 4rem;
@@ -99,4 +112,4 @@ const NavListItem = styled.li`
   }
 `;
 
-export { NavListContainer, NavLogoContainer, NavList, NavListItem };
+export { NavListContainer, NavLogoContainer, NavList, NavListItem, MobileNavContainer };

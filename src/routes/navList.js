@@ -3,8 +3,6 @@ import { FiDollarSign } from "react-icons/fi";
 import { RiQuillPenLine } from "react-icons/ri";
 import { FiUser } from "react-icons/fi";
 import { RiHome4Line } from "react-icons/ri";
-import { AiFillHome, AiOutlineDollar } from "react-icons/ai";
-// import { AiOutlineDollarCircle } from "react-icons/hi";
 
 export default [
   {

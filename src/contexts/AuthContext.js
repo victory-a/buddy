@@ -25,7 +25,9 @@ function AuthProvider(props) {
     queryFn: bootstrapAppData,
     config: {
       onSettled: () => setFirstAttemptFinished(true),
-      onSuccess: async () => await queryCache.invalidateQueries("userDetails")
+      onSuccess: async data => {
+        await queryCache.invalidateQueries("userDetails");
+      }
     }
   });
 

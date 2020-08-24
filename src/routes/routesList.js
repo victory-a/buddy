@@ -7,6 +7,8 @@ const ForgotPassword = lazy(() => import("pages/Auth/ForgotPassword"));
 const ResetPassword = lazy(() => import("pages/Auth/ResetPassword"));
 const Home = lazy(() => import("pages/Home"));
 const Profile = lazy(() => import("pages/Profile"));
+const Post = lazy(() => import("pages/Post"));
+const Send = lazy(() => import("pages/Send"));
 
 const routes = [
   {
@@ -50,6 +52,24 @@ const routes = [
     exact: true,
     isPrivate: true,
     component: Profile
+  },
+  {
+    path: "/profile",
+    exact: true,
+    isPrivate: true,
+    component: Profile
+  },
+  {
+    path: "/send",
+    exact: true,
+    isPrivate: true,
+    component: Send
+  },
+  {
+    path: "/post",
+    exact: true,
+    isPrivate: true,
+    component: Post
   },
   {
     path: "*",

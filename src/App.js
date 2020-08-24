@@ -9,10 +9,10 @@ const AuthenticatedApp = lazy(loadAuthenticatedApp);
 const UnauthenticatedApp = lazy(() => import("app/unauthenticatedApp"));
 
 function App() {
-  // const { handleLogout } = useAuth();
-  // useLayoutEffect(() => {
-  //   checkTokenValidity(handleLogout);
-  // }, [handleLogout]);
+  const { handleLogout } = useAuth();
+  useLayoutEffect(() => {
+    checkTokenValidity(handleLogout);
+  }, [handleLogout]);
 
   const { user } = useUserDetails();
 
@@ -23,7 +23,9 @@ function App() {
 
   return (
     <Suspense fallback={<FullPageSpinner />}>
-      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+      {/* {user ? <AuthenticatedApp /> : <UnauthenticatedApp />} */}
+
+      <AuthenticatedApp />
     </Suspense>
   );
 }

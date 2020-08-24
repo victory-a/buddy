@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as Logo } from "assets/logo1.svg";
+import { ReactComponent as Logo } from "assets/logo.svg";
 import navList from "routes/navList";
 import { NavLink, Link, useLocation, useHistory } from "react-router-dom";
 

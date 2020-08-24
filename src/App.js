@@ -6,7 +6,7 @@ import { useAuth } from "contexts/AuthContext";
 const loadAuthenticatedApp = () => import("app/authenticatedApp");
 const AuthenticatedApp = lazy(loadAuthenticatedApp);
 
-// const UnauthenticatedApp = lazy(() => import("app/unauthenticatedApp"));
+const UnauthenticatedApp = lazy(() => import("app/unauthenticatedApp"));
 
 function App() {
   const { handleLogout } = useAuth();
@@ -14,7 +14,7 @@ function App() {
     checkTokenValidity(handleLogout);
   }, [handleLogout]);
 
-  // const { user } = useUserDetails();
+  const { user } = useUserDetails();
 
   // load authenticated app in bg while user completes auth form
   useEffect(() => {
@@ -24,6 +24,7 @@ function App() {
   return (
     <Suspense fallback={<FullPageSpinner />}>
       {/* {user ? <AuthenticatedApp /> : <UnauthenticatedApp />} */}
+
       <AuthenticatedApp />
     </Suspense>
   );

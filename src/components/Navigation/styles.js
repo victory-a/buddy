@@ -5,10 +5,6 @@ import colors from "styles/colors";
 const NavListContainer = styled.nav`
   display: flex;
   flex-direction: column;
-
-  /* @media ${device.tablet} { */
-    align-items: center;
-  /* } */
 `;
 
 const NavLogoContainer = styled.div`
@@ -36,15 +32,15 @@ const NavList = styled.ul`
 
 const NavListItem = styled.li`
   a {
-    align-self: center;
-    border-radius: 50px;
+    align-self: flex-start;
+    border-radius: 70px;
     display: flex;
     justify-content: center;
     text-decoration: none;
     cursor: pointer;
     margin-bottom: 2.5rem;
     color: ${colors.primary};
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     text-decoration: none;
     transition: all 0.1s ease-in;
     padding: 1rem;
@@ -83,8 +79,8 @@ const NavListItem = styled.li`
     }
 
     &.active {
-      font-weight: bold;
-      background-color: rgba(18, 39, 140, 0.4);
+      font-weight: 600;
+      background-color: rgb(42, 62, 152, 0.5);
     }
   }
 

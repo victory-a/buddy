@@ -16,11 +16,11 @@ const NavigationWrapper = styled.div`
   justify-content: center;
 
   @media ${device.tablet} {
-    width: 15rem;
+    width: 12rem;
   }
 
   @media ${device.laptop} {
-    width: 20rem;
+    width: 15rem;
   }
 
   a {
@@ -33,7 +33,7 @@ const NavigationWrapper = styled.div`
 const MainContentWrapper = styled.div`
   flex: 1;
   min-height: 100vh;
-  padding-top: 1rem;
+  padding: 1rem;
   background-color: palevioletred;
 `;
 

@@ -1,27 +1,30 @@
 import React from "react";
-import { FaUser, FaPenAlt } from "react-icons/fa";
-import { AiFillHome, AiFillDollarCircle } from "react-icons/ai";
-// import { AiFillDollarCircle } from "react-icons/hi";
+import { FiDollarSign } from "react-icons/fi";
+import { RiQuillPenLine } from "react-icons/ri";
+import { FiUser } from "react-icons/fi";
+import { RiHome4Line } from "react-icons/ri";
+import { AiFillHome, AiOutlineDollar } from "react-icons/ai";
+// import { AiOutlineDollarCircle } from "react-icons/hi";
 
 export default [
   {
     path: "/",
     title: "Home",
-    logo: <AiFillHome />
+    logo: <RiHome4Line />
   },
   {
     path: "profile",
     title: "Profile",
-    logo: <FaUser />
+    logo: <FiUser />
   },
   {
-    path: "/transfer",
-    title: "Transfer",
-    logo: <AiFillDollarCircle />
+    path: "/send",
+    title: "Send",
+    logo: <FiDollarSign />
   },
   {
     path: "post",
     title: "Post",
-    logo: <FaPenAlt />
+    logo: <RiQuillPenLine />
   }
 ];

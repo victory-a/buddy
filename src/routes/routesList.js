@@ -8,7 +8,7 @@ const ResetPassword = lazy(() => import("pages/Auth/ResetPassword"));
 const Home = lazy(() => import("pages/Home"));
 const Profile = lazy(() => import("pages/Profile"));
 const Post = lazy(() => import("pages/Post"));
-const Transfer = lazy(() => import("pages/Transfer"));
+const Send = lazy(() => import("pages/Send"));
 
 const routes = [
   {
@@ -60,10 +60,10 @@ const routes = [
     component: Profile
   },
   {
-    path: "/transfer",
+    path: "/send",
     exact: true,
     isPrivate: true,
-    component: Transfer
+    component: Send
   },
   {
     path: "/post",

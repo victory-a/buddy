@@ -1,7 +1,7 @@
 import React from "react";
 
 const Transfer = () => {
-  return <div></div>;
+  return <div>Send</div>;
 };
 
 export default Transfer;

@@ -43,6 +43,14 @@ const GlobalStyles = createGlobalStyle`
   ul {
     list-style-type: none;
   }
+
+  a:focus {
+    outline: none;
+    @media ${device.mobile} {
+    outline: .5px solid ${colors.primary};
+
+    } 
+  }
 `;
 
 export default GlobalStyles;

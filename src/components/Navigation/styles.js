@@ -3,15 +3,41 @@ import { device } from "styles";
 import colors from "styles/colors";
 
 const MobileNavContainer = styled.div`
-  /* border: 1px solid red; */
   width: 100%;
-  height: 5rem;
+  height: 6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 1rem;
 
   & .burger-menu {
     padding: 0.3rem;
+  }
+
+  & .page-title {
+    font-weight: 600;
+    font-size: 1.7rem;
+    text-align: center;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  & .nav-menu {
+    text-align: end;
+
+    img {
+      width: auto;
+      height: 2.5rem;
+      margin-left: auto;
+    }
+
+    span.icon {
+      margin-right: 0.5rem;
+
+      svg {
+        width: 20px;
+      }
+    }
   }
 `;
 
@@ -49,26 +75,28 @@ const NavListItem = styled.li`
     border-radius: 70px;
     display: flex;
     justify-content: center;
+    align-items: center;
     text-decoration: none;
     cursor: pointer;
     margin-bottom: 2.5rem;
     color: ${colors.primary};
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-decoration: none;
     transition: all 0.1s ease-in;
     padding: 1rem;
 
-    svg {
-      display: block;
+    @media ${device.tablet} {
+      font-size: 1.2rem;
     }
 
     /* hide the navlink text on smaller screens */
-    & span {
-      display: none;
-    }
 
-    @media ${device.tablet} {
-      & span {
+    & span {
+      @media ${device.mobile} {
+        display: none;
+      }
+
+      @media ${device.tablet} {
         display: initial;
       }
     }
@@ -82,8 +110,15 @@ const NavListItem = styled.li`
 
     svg {
       height: auto;
-      width: 2rem;
+      width: 2.5rem;
+      margin-right: 0.8rem;
       transition: fill 0.1s ease;
+
+      @media ${device.mobile} {
+        display: block;
+        width: 2rem;
+        margin-right: 0;
+      }
 
       @media ${device.tablet} {
         margin-right: 0.8rem;

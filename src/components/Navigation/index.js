@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { NavLink, Link, useLocation, useHistory } from "react-router-dom";
 import { RiMenu2Line } from "react-icons/ri";
 
@@ -8,6 +8,9 @@ import { useUserDetails } from "lib/auth-client";
 import navList from "routes/navList";
 
 import { ReactComponent as Logo } from "assets/logo.svg";
+import { ReactComponent as Profile } from "assets/profile.svg";
+import { ReactComponent as Logout } from "assets/logout.svg";
+
 import {
   NavListContainer,
   NavLogoContainer,
@@ -15,7 +18,18 @@ import {
   NavListItem,
   MobileNavContainer
 } from "./styles";
-import { useDisclosure } from "@chakra-ui/core";
+import {
+  useDisclosure,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerBody,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Avatar
+} from "@chakra-ui/core";
 
 const MainNav = () => {
   const { pathname } = useLocation();
@@ -55,21 +69,59 @@ const MainNav = () => {
   );
 };
 
+const NavDrawer = ({ onClose, isOpen }) => {
+  return (
+    <Drawer onClose={onClose} isOpen={isOpen} size="xs" placement="left">
+      <DrawerOverlay />
+      <DrawerContent>
+        <DrawerBody>
+          <MainNav />
+        </DrawerBody>
+      </DrawerContent>
+    </Drawer>
+  );
+};
+
 const MobileNav = () => {
   const { push } = useHistory();
   const { user } = useUserDetails();
   const { pageTitle } = usePageDetails();
-  const { logout } = useAuth();
+  const { handleLogout } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <MobileNavContainer>
-      <div className="burger-menu" onClick={onOpen}>
-        <RiMenu2Line size={20} />
-      </div>
+    <>
+      <MobileNavContainer>
+        <div className="burger-menu" onClick={onOpen}>
+          <RiMenu2Line size={24} />
+        </div>
 
-      <div className="page-title">{pageTitle}</div>
-    </MobileNavContainer>
+        <div className="page-title">{pageTitle}</div>
+
+        <div className="nav-menu">
+          <Menu autoSelect={false}>
+            <MenuButton>
+              <Avatar size="md" name={`${user?.firstName} ${user?.lastName}`} src={user?.photo} />
+            </MenuButton>
+            <MenuList borderRadius="8px" placement="bottom-end" border="1.5px solid #C5D4F6">
+              <MenuItem py="0.7rem" onClick={() => push("profile")}>
+                <span className="icon">
+                  <Profile />
+                </span>
+                <span>Profile</span>
+              </MenuItem>
+              <MenuItem p="1rem" onClick={handleLogout}>
+                <span className="icon">
+                  <Logout />
+                </span>
+                <span>Logout</span>
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </div>
+      </MobileNavContainer>
+      <NavDrawer isOpen={isOpen} onClose={onClose} />
+    </>
   );
 };
 

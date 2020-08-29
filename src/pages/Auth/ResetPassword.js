@@ -7,7 +7,7 @@ import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
 import { resetPasswordSchema } from "utils/validationSchema";
 import { Link, useHistory } from "react-router-dom";
-import { resetPassword } from "lib/auth-client";
+import { resetPassword } from "lib/user-client";
 import useCustomToast from "hooks/useCustomToast";
 import { ShowError } from "components/ShowError/ShowError";
 import {

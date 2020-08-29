@@ -19,10 +19,10 @@ export default [
     path: "/send",
     title: "Send",
     logo: <FiDollarSign />
-  },
-  {
-    path: "post",
-    title: "Post",
-    logo: <RiQuillPenLine />
   }
+  // {
+  //   path: "#",
+  //   title: "Post",
+  //   logo: <RiQuillPenLine />
+  // }
 ];

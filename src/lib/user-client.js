@@ -86,6 +86,10 @@ function logout() {
   return Promise.resolve();
 }
 
+async function updateUser(payload) {
+  return await client("auth/updatedetails", { body: payload, method: "PUT" });
+}
+
 // react query utils
 function fetchUserDetails() {
   return queryCache.getQueryData("user");
@@ -110,5 +114,6 @@ export {
   forgotPassword,
   resetPassword,
   useUserDetails,
-  checkTokenValidity
+  checkTokenValidity,
+  updateUser
 };

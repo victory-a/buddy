@@ -6,7 +6,7 @@ import ErrorBoundaryFallback from "../components/errorBoundary";
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   return (
     <Route {...rest}>
-      <ErrorBoundary fallbackComponent={ErrorBoundaryFallback}>
+      <ErrorBoundary FallbackComponent={ErrorBoundaryFallback}>
         <Component />
       </ErrorBoundary>
     </Route>

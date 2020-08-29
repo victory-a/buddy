@@ -7,7 +7,7 @@ import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
 import PasswordInput from "components/TextInput/PasswordInput";
 import { createAccountSchema } from "utils/validationSchema";
-import { register } from "lib/auth-client";
+import { register } from "lib/user-client";
 import { ShowError } from "components/ShowError/ShowError";
 
 import {

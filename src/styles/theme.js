@@ -1,7 +1,7 @@
 import { theme } from "@chakra-ui/core";
 import colors from "./colors";
 
-const breakpoints = ["375px", "768px", "1025px", "1441px"];
+const breakpoints = ["425px", "768px", "1025px", "1441px"];
 
 breakpoints.mobile = breakpoints[0];
 breakpoints.tablet = breakpoints[1];

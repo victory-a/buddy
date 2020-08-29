@@ -1,16 +1,16 @@
 import React from "react";
 import { NavLink, Link, useLocation, useHistory } from "react-router-dom";
+import CustomModal from "components/Modal";
 import { RiMenu2Line } from "react-icons/ri";
+import { IoIosLogOut } from "react-icons/io";
+import { RiQuillPenLine } from "react-icons/ri";
 
 import { useAuth } from "contexts/AuthContext";
 import { usePageDetails } from "layout/AppLayout";
-import { useUserDetails } from "lib/auth-client";
+import { useUserDetails } from "lib/user-client";
 import navList from "routes/navList";
 
 import { ReactComponent as Logo } from "assets/logo.svg";
-import { ReactComponent as Profile } from "assets/profile.svg";
-import { ReactComponent as Logout } from "assets/logout.svg";
-
 import {
   NavListContainer,
   NavLogoContainer,
@@ -18,6 +18,7 @@ import {
   NavListItem,
   MobileNavContainer
 } from "./styles";
+
 import {
   useDisclosure,
   Drawer,
@@ -30,6 +31,7 @@ import {
   MenuItem,
   Avatar
 } from "@chakra-ui/core";
+import Post from "pages/Post";
 
 const MainNav = () => {
   const { pathname } = useLocation();
@@ -64,6 +66,13 @@ const MainNav = () => {
             </NavListItem>
           );
         })}
+        <NavListItem>
+          <div className="toggle-post-modal">
+            <RiQuillPenLine />
+            <span>Post</span>
+            {/* <Post/> */}
+          </div>
+        </NavListItem>
       </NavList>
     </NavListContainer>
   );
@@ -104,15 +113,15 @@ const MobileNav = () => {
               <Avatar size="md" name={`${user?.firstName} ${user?.lastName}`} src={user?.photo} />
             </MenuButton>
             <MenuList borderRadius="8px" placement="bottom-end" border="1.5px solid #C5D4F6">
-              <MenuItem py="0.7rem" onClick={() => push("profile")}>
+              {/* <MenuItem py="0.7rem" onClick={() => push("profile")}>
                 <span className="icon">
                   <Profile />
                 </span>
                 <span>Profile</span>
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem p="1rem" onClick={handleLogout}>
                 <span className="icon">
-                  <Logout />
+                  <IoIosLogOut />
                 </span>
                 <span>Logout</span>
               </MenuItem>

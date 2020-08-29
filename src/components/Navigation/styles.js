@@ -70,7 +70,8 @@ const NavList = styled.ul`
 `;
 
 const NavListItem = styled.li`
-  a {
+  a,
+  .toggle-post-modal {
     align-self: flex-start;
     border-radius: 70px;
     display: flex;
@@ -80,13 +81,13 @@ const NavListItem = styled.li`
     cursor: pointer;
     margin-bottom: 2.5rem;
     color: ${colors.primary};
-    font-size: 1.4rem;
+    /* font-size: 1.4rem; */
     text-decoration: none;
     transition: all 0.1s ease-in;
     padding: 1rem;
 
     @media ${device.tablet} {
-      font-size: 1.2rem;
+      font-size: 1.6rem;
     }
 
     /* hide the navlink text on smaller screens */
@@ -127,13 +128,15 @@ const NavListItem = styled.li`
     }
 
     &.active {
-      font-weight: 600;
-      background-color: rgb(42, 62, 152, 0.5);
+      background-color: ${colors.blue};
+      color: ${colors.white};
+      opacity: 0.9;
     }
   }
 
   @media ${device.tablet} {
-    a {
+    a,
+    .toggle-post-modal {
       padding: 1rem 1.5rem;
       display: flex;
       left: initial;
@@ -141,7 +144,8 @@ const NavListItem = styled.li`
   }
 
   @media ${device.laptop} {
-    a {
+    a,
+    .toggle-post-modal {
       padding: 1rem 2rem;
     }
   }

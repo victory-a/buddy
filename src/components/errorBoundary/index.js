@@ -1,9 +1,8 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import * as React from "react";
 import { device } from "styles";
-import colors from "styles/colors";
+import styled from "styled-components";
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -15,17 +14,23 @@ const Container = styled.div`
   }
 `;
 
-const Message = styled.div`
-  border: 2px ${colors.primary} solid;
+export const Message = styled.div`
+  border: 2px #78909c solid;
   border-radius: 5px;
   font-size: 24px;
-  color: ${colors.primary};
+  color: #78909c;
   text-align: center;
   padding: 20px;
 
   @media ${device.laptop} {
     padding: 40px;
   }
+`;
+
+export const Link = styled.div`
+  cursor: pointer;
+  padding-top: 1.5rem;
+  text-decoration: underline;
 `;
 
 const ErrorBoundaryFallbackComponent = () => (
@@ -40,7 +45,7 @@ const ErrorBoundaryFallbackComponent = () => (
   </Container>
 );
 
-class ErrorBoundary extends Component {
+class ErrorBoundary extends React.Component {
   state = {
     error: null,
     info: null

@@ -38,6 +38,7 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     outline: none;
     color: ${colors.primary};
+    background-color: ${colors.white}
   }
 
   ul {
@@ -46,10 +47,9 @@ const GlobalStyles = createGlobalStyle`
 
   a:focus {
     outline: none;
-    @media ${device.mobile} {
-    outline: .5px solid ${colors.primary};
-
-    } 
+    /* @media ${device.mobile} {
+      outline: .5px solid ${colors.primary};
+    }  */
   }
 `;
 

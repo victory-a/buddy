@@ -8,7 +8,7 @@ import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
 import PasswordInput from "components/TextInput/PasswordInput";
 import { signInSchema } from "utils/validationSchema";
-import { login } from "lib/auth-client";
+import { login } from "lib/user-client";
 
 import {
   TitleContainer,

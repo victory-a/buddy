@@ -2,6 +2,11 @@ import React, { useState, useContext, createContext } from "react";
 import { Container, MainContentWrapper, NavigationWrapper } from "./styles";
 import { useMediaQuery } from "react-responsive";
 import { MainNav, MobileNav } from "components/Navigation";
+import {
+  BackgroundContainer,
+  BackgroundContainer2,
+  BackgroundContainer3
+} from "layout/AuthLayout/styles";
 
 // define screen sizes and render layout based on screen size
 export const MobileScreen = ({ children }) => {
@@ -27,6 +32,9 @@ const AppLayout = ({ children }) => {
   return (
     <Provider value={{ pageTitle, setPageTitle }}>
       <Container>
+        <BackgroundContainer />
+        <BackgroundContainer2 />
+        <BackgroundContainer3 />
         <MobileScreen>
           <MobileNav />
         </MobileScreen>

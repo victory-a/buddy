@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext } from "react";
 import { useQuery, queryCache } from "react-query";
 import { FullPageSpinner } from "components/loaders.js";
-import { logout, getUser } from "lib/auth-client";
+import { logout, getUser } from "lib/user-client";
 
 // checks for valid user details to determine what part of the app to render
 async function bootstrapAppData() {

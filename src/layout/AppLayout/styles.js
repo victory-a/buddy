@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import { device } from "styles";
-// import colors from "styles/colors";
+import colors from "styles/colors";
 
 const Container = styled.main`
   display: flex;
   flex-direction: column;
   width: 100%;
   min-height: 100%;
-  background-color: #fff;
-
+  /* background-color: #fff; */
+  border-right: 0.5px solid rgba(18, 39, 140, 0.1);
+  margin: 0 auto;
+  max-width: 100rem;
   @media ${device.mobile} {
     flex-direction: row;
   }

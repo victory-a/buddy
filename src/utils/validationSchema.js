@@ -58,3 +58,11 @@ export const editProfileSchema = () =>
       .trim()
       .max(160, "bio cannot exceed 160 characters")
   });
+
+export const createPostSchema = () =>
+  Yup.object().shape({
+    text: Yup.string()
+      .required()
+      .label("Post")
+      .max("300", "cannot exceed 300 characters")
+  });

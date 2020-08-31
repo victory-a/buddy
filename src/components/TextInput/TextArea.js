@@ -12,7 +12,7 @@ const TextArea = ({ label, type = "text", ...props }) => {
         <CustomTextArea
           as="textarea"
           placeholder="Here is a sample placeholder"
-          size="100%"
+          // size="100%"
           // maxLength={160}
           {...field}
           {...props}

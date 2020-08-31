@@ -1,5 +1,6 @@
 import React from "react";
 import { IoIosClose } from "react-icons/io";
+
 import { Modal, ModalOverlay, ModalContent, ModalBody, SlideIn } from "@chakra-ui/core";
 
 import { StatusContainer, CloseButton, ModalTitle } from "./styles";
@@ -9,10 +10,12 @@ const CustomModal = ({
   onClose,
   children,
   showCloseBtn = true,
-  overlayClose = true,
-  size = "lg",
+  overlayClose = false,
+  size,
   type = "padded",
-  title = ""
+  title = "",
+  isCentered = true,
+  ...props
 }) => {
   return (
     <SlideIn in={isOpen}>
@@ -20,10 +23,10 @@ const CustomModal = ({
         <Modal
           isOpen={isOpen}
           size={size}
-          width="auto"
-          scrollBehavior="inside"
-          isCentered={true}
+          isCentered={isCentered}
           closeOnOverlayClick={overlayClose}
+          onClose={onClose}
+          {...props}
         >
           <ModalOverlay bg="hsla(222, 74%, 17%, 0.4)" />
           <ModalContent borderRadius={type === "padded" ? 4 : 0}>

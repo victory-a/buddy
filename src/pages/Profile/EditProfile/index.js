@@ -12,6 +12,7 @@ import femaleFB from "assets/female-fb.svg";
 import Button from "components/Button";
 import { ShowError } from "components/ShowError/ShowError";
 import TextInput from "components/TextInput";
+import TextArea from "components/TextInput/TextArea.js";
 import SelectInput from "components/TextInput/SelectInput";
 import { Spinner } from "components/loaders.js";
 import { FieldsContainer } from "./styles.js";
@@ -24,7 +25,6 @@ import {
   ProfileImageWrapper,
   NameContainer
 } from "./styles";
-import TextArea from "components/TextInput/TextArea.js";
 
 const genderArr = [
   { value: "male", label: "Male" },

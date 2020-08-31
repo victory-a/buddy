@@ -1,6 +1,5 @@
 import React from "react";
 import { FiDollarSign } from "react-icons/fi";
-import { RiQuillPenLine } from "react-icons/ri";
 import { FiUser } from "react-icons/fi";
 import { RiHome4Line } from "react-icons/ri";
 
@@ -20,9 +19,4 @@ export default [
     title: "Send",
     logo: <FiDollarSign />
   }
-  // {
-  //   path: "#",
-  //   title: "Post",
-  //   logo: <RiQuillPenLine />
-  // }
 ];

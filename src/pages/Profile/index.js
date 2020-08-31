@@ -1,8 +1,8 @@
 import React from "react";
 import { Image, Tabs, TabList, TabPanels, Tab, TabPanel, useDisclosure } from "@chakra-ui/core";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import { queryCache, useMutation } from "react-query";
-import { updateUser } from "lib/user-client";
+// import { queryCache, useMutation } from "react-query";
+// import { updateUser } from "lib/user-client";
 import { useMediaQuery } from "react-responsive";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -124,13 +124,13 @@ const Profile = () => {
       </BioContainer>
 
       <TabContainer>
-        <Tabs isFitted variantColor="buddy.primary">
+        <Tabs isFitted>
           <TabList>
             {tabOptions.map((tab, i) => (
               <Tab
                 key={i}
                 p="0.5rem"
-                color="buddy.primary"
+                color="buddy.blue"
                 textAlign="start"
                 whiteSpace="nowrap"
                 w="100%"

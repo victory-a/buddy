@@ -1,9 +1,9 @@
 import React from "react";
-import { NavLink, Link, useLocation, useHistory } from "react-router-dom";
-import CustomModal from "components/Modal";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { RiMenu2Line } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
 import { RiQuillPenLine } from "react-icons/ri";
+import { useDisclosure } from "@chakra-ui/core";
 
 import { useAuth } from "contexts/AuthContext";
 import { usePageDetails } from "layout/AppLayout";
@@ -13,7 +13,7 @@ import navList from "routes/navList";
 import Drawer, { useDrawer } from "components/Drawer";
 
 import { ReactComponent as Logo } from "assets/logo.svg";
-import CreatePost, { useCreatePost } from "pages/CreatePost";
+import CreatePost from "pages/CreatePost";
 import {
   NavListContainer,
   NavLogoContainer,
@@ -26,8 +26,7 @@ import { Menu, MenuButton, MenuList, MenuItem, Avatar } from "@chakra-ui/core";
 
 const MainNav = () => {
   const { pathname } = useLocation();
-  const { isOpen, onOpen, onClose } = useCreatePost();
-  const { isOpen: isDrawerOpen, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDrawer();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <NavListContainer>
@@ -60,13 +59,7 @@ const MainNav = () => {
           );
         })}
         <NavListItem>
-          <div
-            className="toggle-post-modal"
-            onClick={() => {
-              onOpen();
-              onCloseDrawer();
-            }}
-          >
+          <div className="toggle-post-modal" onClick={onOpen}>
             <RiQuillPenLine />
             <span>Post</span>
             <CreatePost isOpen={isOpen} onClose={onClose} />
@@ -86,7 +79,7 @@ const NavDrawer = ({ isOpen, onClose }) => {
 };
 
 const MobileNav = () => {
-  const { push } = useHistory();
+  // const { push } = useHistory();
   const { user } = useUserDetails();
   const { pageTitle } = usePageDetails();
   const { handleLogout } = useAuth();

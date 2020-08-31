@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import colors from "styles/colors";
 import { device } from "styles";
 
 const CloseButton = styled.button`
@@ -23,9 +22,10 @@ const CloseButton = styled.button`
 
 const StatusContainer = styled.div`
   padding: 1.5rem;
+  padding-bottom: 0;
 
   @media ${device.tablet} {
-    padding: 3rem;
+    padding: 2.5rem;
   }
 `;
 

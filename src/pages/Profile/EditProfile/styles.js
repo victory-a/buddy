@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import colors from "styles/colors";
 import { device } from "styles";
 import { InlineFields } from "layout/AuthLayout/styles";
 

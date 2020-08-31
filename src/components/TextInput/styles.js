@@ -60,7 +60,7 @@ const Input = styled.input`
 `;
 
 const CustomTextArea = styled(Input)`
-  height: 10rem;
+  height: ${props => props.height || "10rem"};
 `;
 
 // select input styles

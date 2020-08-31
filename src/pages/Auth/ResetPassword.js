@@ -2,12 +2,14 @@ import React, { Fragment, useLayoutEffect } from "react";
 import { useMutation } from "react-query";
 import { Formik } from "formik";
 import { useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+import { resetPasswordSchema } from "utils/validationSchema";
+import { resetPassword } from "lib/user-client";
+
 import PasswordInput from "components/TextInput/PasswordInput";
 import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
-import { resetPasswordSchema } from "utils/validationSchema";
-import { Link, useHistory } from "react-router-dom";
-import { resetPassword } from "lib/user-client";
 import useCustomToast from "hooks/useCustomToast";
 import { ShowError } from "components/ShowError/ShowError";
 import {
@@ -57,8 +59,8 @@ const ResetPassword = () => {
       >
         {({ handleSubmit, isSubmitting, isValid }) => (
           <FormWrapper onSubmit={handleSubmit}>
-            <PasswordInput name="newPassword" title="Password" />
-            <PasswordInput name="confirmPassword" title="Confirm Password" />
+            <PasswordInput name="newPassword" label="Password" />
+            <PasswordInput name="confirmPassword" label="Confirm Password" />
 
             <ShowError status={status} error={error} />
 

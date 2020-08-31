@@ -59,9 +59,26 @@ const Input = styled.input`
   }
 `;
 
+const CustomTextArea = styled(Input)`
+  height: 10rem;
+`;
+
+// select input styles
+const SelectContainer = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
+
+  & div > div:first-of-type {
+    width: 2.5rem;
+  }
+  select option {
+    color: red;
+  }
+`;
+
 const ErrorSpan = styled.span`
   color: ${colors?.error};
   font-size: 1.1rem;
 `;
 
-export { Container, Input, Label, Span, ErrorSpan };
+export { Container, Input, CustomTextArea, Label, Span, ErrorSpan, SelectContainer };

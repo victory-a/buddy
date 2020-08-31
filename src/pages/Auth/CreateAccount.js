@@ -2,12 +2,14 @@ import React, { Fragment, useLayoutEffect } from "react";
 import { queryCache, useMutation } from "react-query";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
+
+import { createAccountSchema } from "utils/validationSchema";
+import { register } from "lib/user-client";
+
 import TextInput from "components/TextInput";
 import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
 import PasswordInput from "components/TextInput/PasswordInput";
-import { createAccountSchema } from "utils/validationSchema";
-import { register } from "lib/user-client";
 import { ShowError } from "components/ShowError/ShowError";
 
 import {
@@ -54,17 +56,17 @@ const CreateAccount = () => {
         {({ handleSubmit, isSubmitting, isValid }) => (
           <FormWrapper onSubmit={handleSubmit}>
             <InlineFields>
-              <TextInput name="firstName" placeholder="david" title="First name" />
-              <TextInput name="lastName" placeholder="ekezie" title="Last name" />
+              <TextInput name="firstName" placeholder="david" label="First name" />
+              <TextInput name="lastName" placeholder="ekezie" label="Last name" />
             </InlineFields>
             <TextInput
               name="email"
               type="email"
               placeholder="ekeziedavid@gmail.com"
-              title="Email Address"
+              label="Email Address"
             />
 
-            <PasswordInput name="password" title="Password" />
+            <PasswordInput name="password" label="Password" />
 
             <ShowError
               status={status}

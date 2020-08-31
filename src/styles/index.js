@@ -46,10 +46,10 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a:focus {
-    outline: none;
-    /* @media ${device.mobile} {
+    /* outline: none; */
+    @media ${device.mobile} {
       outline: .5px solid ${colors.primary};
-    }  */
+    } 
   }
 `;
 

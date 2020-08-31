@@ -7,7 +7,7 @@ const ForgotPassword = lazy(() => import("pages/Auth/ForgotPassword"));
 const ResetPassword = lazy(() => import("pages/Auth/ResetPassword"));
 const Home = lazy(() => import("pages/Home"));
 const Profile = lazy(() => import("pages/Profile"));
-const Post = lazy(() => import("pages/Post"));
+const Post = lazy(() => import("pages/CreatePost"));
 const Send = lazy(() => import("pages/Send"));
 
 const routes = [

@@ -7,7 +7,7 @@ const useCustomToast = () => {
     title = "Successful!",
     description = "Operation successful!",
     status = "success",
-    position = "bottom",
+    position = "top-right",
     duration = 5000,
     isClosable = true
   ) => toast({ position, title, description, status, duration, isClosable });

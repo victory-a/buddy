@@ -6,6 +6,8 @@ import { updateUser } from "lib/user-client";
 import { useMediaQuery } from "react-responsive";
 import "react-circular-progressbar/dist/styles.css";
 
+import { useUserDetails } from "lib/user-client";
+
 import Modal from "components/Modal";
 import Following from "./Tabs/Following";
 import Followers from "./Tabs/Followers";
@@ -36,19 +38,20 @@ const tabOptions = [
   { label: "Followers", content: Followers }
 ];
 
-const user = {
-  progress: 60,
-  firstName: "Ekezie",
-  lastName: "David",
-  following: 2,
-  followers: 1670,
-  posts: ["hello world", "whats popping"],
-  bio:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam iure quae nostrum ipsam neque soluta aperiam."
-};
+// const user = {
+//   progress: 60,
+//   firstName: "Ekezie",
+//   lastName: "David",
+//   following: 2,
+//   followers: 1670,
+//   posts: ["hello world", "whats popping"],
+//   bio:
+//     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam iure quae nostrum ipsam neque soluta aperiam."
+// };
 
 const Profile = () => {
   const { setPageTitle } = usePageDetails();
+  const { user } = useUserDetails();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [progressValue, stetProgressValue] = React.useState(0);
 
@@ -58,11 +61,11 @@ const Profile = () => {
   React.useEffect(() => {
     function updateProfileProgress() {
       return setTimeout(() => {
-        stetProgressValue(user.progress);
+        stetProgressValue(user?.progress ?? 0);
       }, 200);
     }
     updateProfileProgress();
-  }, []);
+  }, [user]);
 
   React.useLayoutEffect(() => {
     setPageTitle("Profile");
@@ -76,8 +79,14 @@ const Profile = () => {
   return (
     <ProfileContainer>
       <EditButton onClick={onOpen}>Edit</EditButton>
-      <Modal isOpen={isOpen} onClose={onClose} overlayClose={false}>
-        <EditProfile />
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        overlayClose={false}
+        title="Edit Profile"
+        size={{ base: "90%", tablet: "55%", laptop: "530px" }}
+      >
+        <EditProfile onClose={onClose} />
       </Modal>
 
       <ProfileImageWrapper>
@@ -102,20 +111,20 @@ const Profile = () => {
       </ProfileImageWrapper>
 
       <BioContainer>
-        <NameWrapper>{`${user.firstName} ${user.lastName}`}</NameWrapper>
+        <NameWrapper>{`${user?.firstName ?? ""} ${user?.lastName ?? ""}`}</NameWrapper>
         <p>{user?.bio}</p>
         <ConnectionStats>
           <p>
-            <span>{user.following}</span> following
+            <span>{user?.following ?? 0}</span> following
           </p>
           <p>
-            <span>{user.followers}</span> followers
+            <span>{user?.followers ?? 0}</span> followers
           </p>
         </ConnectionStats>
       </BioContainer>
 
       <TabContainer>
-        <Tabs isFitted>
+        <Tabs isFitted variantColor="buddy.primary">
           <TabList>
             {tabOptions.map((tab, i) => (
               <Tab

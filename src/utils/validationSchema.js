@@ -1,9 +1,16 @@
 import * as Yup from "yup";
 
-const validateLastName = () => Yup.string().required("last name is required");
-const validateFirstName = () => Yup.string().required("first name is required");
+const validateLastName = () =>
+  Yup.string()
+    .trim()
+    .required("last name is required");
+const validateFirstName = () =>
+  Yup.string()
+    .trim()
+    .required("first name is required");
 const validateEmail = () =>
   Yup.string()
+    .trim()
     .email("enter a valid email")
     .required("email is required");
 const validatePassword = () =>
@@ -14,6 +21,7 @@ const confirmPassword = () =>
   Yup.string()
     .oneOf([Yup.ref("newPassword")], "Password must match")
     .required("Confirm password is required");
+const validateGender = () => Yup.string().required("Please select a gender");
 
 export const signInSchema = () =>
   Yup.object().shape({
@@ -38,4 +46,15 @@ export const resetPasswordSchema = () =>
   Yup.object().shape({
     newPassword: validatePassword(),
     confirmPassword: confirmPassword()
+  });
+
+export const editProfileSchema = () =>
+  Yup.object().shape({
+    firstName: validateFirstName(),
+    lastName: validateLastName(),
+    email: validateEmail(),
+    gender: validateGender(),
+    bio: Yup.string()
+      .trim()
+      .max(160, "bio cannot exceed 160 characters")
   });

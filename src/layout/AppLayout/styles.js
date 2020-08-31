@@ -45,4 +45,8 @@ const MainContentWrapper = styled.div`
   /* background-color: palevioletred; */
 `;
 
-export { Container, NavigationWrapper, MainContentWrapper };
+const FormWrapper = styled.form`
+  margin-top: 2rem;
+`;
+
+export { Container, NavigationWrapper, MainContentWrapper, FormWrapper };

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useField } from "formik";
-import { Input, Container, Label, Span, ErrorSpan } from "./style";
+import { Input, Container, Label, Span, ErrorSpan } from "./styles";
 import { IoIosEyeOff, IoIosEye } from "react-icons/io";
 
-const PasswordInput = ({ title, placeholder = "Password", ...props }) => {
+const PasswordInput = ({ label, placeholder = "Password", ...props }) => {
   const [field, meta] = useField(props);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -11,7 +11,7 @@ const PasswordInput = ({ title, placeholder = "Password", ...props }) => {
 
   return (
     <Container className={`${meta.touched && meta.error ? "error" : ""}`}>
-      <Label>{title}</Label>
+      <Label>{label}</Label>
       <Span>
         <Input
           placeholder={placeholder}

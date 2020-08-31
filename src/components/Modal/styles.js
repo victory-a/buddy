@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import colors from "styles/colors";
+import { device } from "styles";
 
 const CloseButton = styled.button`
-  /* width: 32px; */
-  /* height: 32px; */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -13,7 +12,7 @@ const CloseButton = styled.button`
   position: absolute;
   top: 10px;
   right: 5px;
-  z-index: 2;
+  z-index: 4;
   border-radius: 5px;
   background-color: rgba(18, 39, 140, 0.1);
 
@@ -23,7 +22,25 @@ const CloseButton = styled.button`
 `;
 
 const StatusContainer = styled.div`
-  padding: 1.875rem;
+  padding: 1.5rem;
+
+  @media ${device.tablet} {
+    padding: 3rem;
+  }
 `;
 
-export { StatusContainer, CloseButton };
+const ModalTitle = styled.h3`
+  margin-top: 2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
+  font-size: 1.6rem;
+  margin-left: 0;
+
+  @media ${device.tablet} {
+    text-align: left;
+    margin-left: 1.5rem;
+  }
+`;
+
+export { StatusContainer, CloseButton, ModalTitle };

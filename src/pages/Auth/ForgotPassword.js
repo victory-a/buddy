@@ -2,11 +2,13 @@ import React, { Fragment, useLayoutEffect } from "react";
 import { useMutation } from "react-query";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
+
+import { forgotPasswordSchema } from "utils/validationSchema";
+import { forgotPassword } from "lib/user-client";
+
 import TextInput from "components/TextInput";
 import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
-import { forgotPasswordSchema } from "utils/validationSchema";
-import { forgotPassword } from "lib/user-client";
 import useCustomToast from "hooks/useCustomToast";
 import { ShowError } from "components/ShowError/ShowError";
 
@@ -56,7 +58,7 @@ const ForgotPassword = () => {
               name="email"
               type="email"
               placeholder="ekeziedavid@gmail.com"
-              title="Email Address"
+              label="Email Address"
             />
 
             <ShowError status={status} error={error} />

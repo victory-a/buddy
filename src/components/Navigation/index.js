@@ -10,7 +10,10 @@ import { usePageDetails } from "layout/AppLayout";
 import { useUserDetails } from "lib/user-client";
 import navList from "routes/navList";
 
+import Drawer, { useDrawer } from "components/Drawer";
+
 import { ReactComponent as Logo } from "assets/logo.svg";
+import CreatePost, { useCreatePost } from "pages/CreatePost";
 import {
   NavListContainer,
   NavLogoContainer,
@@ -19,22 +22,12 @@ import {
   MobileNavContainer
 } from "./styles";
 
-import {
-  useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerBody,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Avatar
-} from "@chakra-ui/core";
-import Post from "pages/Post";
+import { Menu, MenuButton, MenuList, MenuItem, Avatar } from "@chakra-ui/core";
 
 const MainNav = () => {
   const { pathname } = useLocation();
+  const { isOpen, onOpen, onClose } = useCreatePost();
+  const { isOpen: isDrawerOpen, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDrawer();
 
   return (
     <NavListContainer>
@@ -67,10 +60,16 @@ const MainNav = () => {
           );
         })}
         <NavListItem>
-          <div className="toggle-post-modal">
+          <div
+            className="toggle-post-modal"
+            onClick={() => {
+              onOpen();
+              onCloseDrawer();
+            }}
+          >
             <RiQuillPenLine />
             <span>Post</span>
-            {/* <Post/> */}
+            <CreatePost isOpen={isOpen} onClose={onClose} />
           </div>
         </NavListItem>
       </NavList>
@@ -78,15 +77,10 @@ const MainNav = () => {
   );
 };
 
-const NavDrawer = ({ onClose, isOpen }) => {
+const NavDrawer = ({ isOpen, onClose }) => {
   return (
     <Drawer onClose={onClose} isOpen={isOpen} size="xs" placement="left">
-      <DrawerOverlay />
-      <DrawerContent>
-        <DrawerBody>
-          <MainNav />
-        </DrawerBody>
-      </DrawerContent>
+      <MainNav />
     </Drawer>
   );
 };
@@ -96,12 +90,13 @@ const MobileNav = () => {
   const { user } = useUserDetails();
   const { pageTitle } = usePageDetails();
   const { handleLogout } = useAuth();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { isOpen: isDrawerOpen, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDrawer();
 
   return (
     <>
       <MobileNavContainer>
-        <div className="burger-menu" onClick={onOpen}>
+        <div className="burger-menu" onClick={onOpenDrawer}>
           <RiMenu2Line size={24} />
         </div>
 
@@ -113,9 +108,9 @@ const MobileNav = () => {
               <Avatar size="md" name={`${user?.firstName} ${user?.lastName}`} src={user?.photo} />
             </MenuButton>
             <MenuList borderRadius="8px" placement="bottom-end" border="1.5px solid #C5D4F6">
-              {/* <MenuItem py="0.7rem" onClick={() => push("profile")}>
+              {/* <MenuItem py="0.7rem" onClick={onOpenCreatePost}>
                 <span className="icon">
-                  <Profile />
+                  <CreatePost isOpen={isCreatePostOpen} onClose={onCloseCreatePost} />
                 </span>
                 <span>Profile</span>
               </MenuItem> */}
@@ -129,7 +124,8 @@ const MobileNav = () => {
           </Menu>
         </div>
       </MobileNavContainer>
-      <NavDrawer isOpen={isOpen} onClose={onClose} />
+      <NavDrawer isOpen={isDrawerOpen} onClose={onCloseDrawer} />
+      {/* <NavDrawer isOpen={isOpen} onClose={onClose} /> */}
     </>
   );
 };

@@ -106,6 +106,7 @@ const NameWrapper = styled.h1`
   font-size: 1.8rem;
   font-weight: bold;
   letter-spacing: 1px;
+  text-transform: capitalize;
 `;
 
 const ConnectionStats = styled.div`

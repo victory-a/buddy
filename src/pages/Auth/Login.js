@@ -2,14 +2,15 @@ import React, { Fragment, useLayoutEffect } from "react";
 import { queryCache, useMutation } from "react-query";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
+
+import { login } from "lib/user-client";
+import { signInSchema } from "utils/validationSchema";
+
 import TextInput from "components/TextInput";
 import { ShowError } from "components/ShowError/ShowError";
 import Button from "components/Button";
 import { Spinner } from "components/loaders.js";
 import PasswordInput from "components/TextInput/PasswordInput";
-import { signInSchema } from "utils/validationSchema";
-import { login } from "lib/user-client";
-
 import {
   TitleContainer,
   Title,
@@ -50,10 +51,10 @@ const Login = () => {
               name="email"
               type="email"
               placeholder="ekeziedavid@gmail.com"
-              title="Email Address"
+              label="Email Address"
             />
 
-            <PasswordInput name="password" title="Password" />
+            <PasswordInput name="password" label="Password" />
 
             <ShowError
               status={status}

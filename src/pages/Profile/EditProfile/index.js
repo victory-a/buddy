@@ -44,9 +44,10 @@ const genderArr = [
 //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam iure quae nostrum ipsam neque soluta aperiam."
 // };
 
-const EditProfile = ({ onClose }) => {
+const EditProfile = ({ onClose, focusRef }) => {
   const { user } = useUserDetails();
   const { doToast } = useCustomToast();
+
   const [mutate, { status, error }] = useMutation(updateUser);
 
   const initialValues = {
@@ -109,7 +110,7 @@ const EditProfile = ({ onClose }) => {
           <Form>
             <FieldsContainer>
               <NameContainer>
-                <TextInput name="firstName" placeholder="david" label="First name" />
+                <TextInput name="firstName" placeholder="david" label="First name" ref={focusRef} />
                 <TextInput name="lastName" placeholder="ekezie" label="Last name" />
               </NameContainer>
 

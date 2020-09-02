@@ -1,17 +1,19 @@
 import React from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation, useHistory } from "react-router-dom";
 import { RiMenu2Line } from "react-icons/ri";
-import { IoIosLogOut } from "react-icons/io";
+import { IoIosLogOut, IoIosSettings } from "react-icons/io";
 import { RiQuillPenLine } from "react-icons/ri";
-import { useDisclosure } from "@chakra-ui/core";
+import { useDisclosure, Image } from "@chakra-ui/core";
 
 import { useAuth } from "contexts/AuthContext";
-import { usePageDetails } from "layout/AppLayout";
+import { usePageDetails, NonMobileScreen } from "layout/AppLayout";
 import { useUserDetails } from "lib/user-client";
 import navList from "routes/navList";
 
 import Drawer, { useDrawer } from "components/Drawer";
 
+import maleFB from "assets/male-fb.svg";
+import femaleFB from "assets/female-fb.svg";
 import { ReactComponent as Logo } from "assets/logo.svg";
 import CreatePost from "pages/CreatePost";
 import {
@@ -22,11 +24,14 @@ import {
   MobileNavContainer
 } from "./styles";
 
-import { Menu, MenuButton, MenuList, MenuItem, Avatar } from "@chakra-ui/core";
+import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/core";
 
 const MainNav = () => {
   const { pathname } = useLocation();
+  const { push } = useHistory();
+  const { user } = useUserDetails();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { handleLogout } = useAuth();
 
   return (
     <NavListContainer>
@@ -66,6 +71,34 @@ const MainNav = () => {
           </div>
         </NavListItem>
       </NavList>
+
+      <NonMobileScreen>
+        <div className="nav-menu">
+          <Menu autoSelect={false}>
+            <MenuButton>
+              <Image
+                rounded="full"
+                src={user?.photo}
+                fallbackSrc={user?.gender === "female" ? femaleFB : maleFB}
+              />
+            </MenuButton>
+            <MenuList borderRadius="8px" placement="bottom-end" border="1.5px solid #C5D4F6">
+              <MenuItem py="0.7rem" onClick={() => push("settings")}>
+                <span className="icon">
+                  <IoIosSettings />
+                </span>
+                <span>Settings</span>
+              </MenuItem>
+              <MenuItem p="1rem" onClick={handleLogout}>
+                <span className="icon">
+                  <IoIosLogOut />
+                </span>
+                <span>Logout</span>
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </div>
+      </NonMobileScreen>
     </NavListContainer>
   );
 };
@@ -79,7 +112,7 @@ const NavDrawer = ({ isOpen, onClose }) => {
 };
 
 const MobileNav = () => {
-  // const { push } = useHistory();
+  const { push } = useHistory();
   const { user } = useUserDetails();
   const { pageTitle } = usePageDetails();
   const { handleLogout } = useAuth();
@@ -98,15 +131,19 @@ const MobileNav = () => {
         <div className="nav-menu">
           <Menu autoSelect={false}>
             <MenuButton>
-              <Avatar size="md" name={`${user?.firstName} ${user?.lastName}`} src={user?.photo} />
+              <Image
+                rounded="full"
+                src={user?.photo}
+                fallbackSrc={user?.gender === "female" ? femaleFB : maleFB}
+              />
             </MenuButton>
             <MenuList borderRadius="8px" placement="bottom-end" border="1.5px solid #C5D4F6">
-              {/* <MenuItem py="0.7rem" onClick={onOpenCreatePost}>
+              <MenuItem p="1rem" onClick={() => push("settings")}>
                 <span className="icon">
-                  <CreatePost isOpen={isCreatePostOpen} onClose={onCloseCreatePost} />
+                  <IoIosSettings />
                 </span>
-                <span>Profile</span>
-              </MenuItem> */}
+                <span>Settings</span>
+              </MenuItem>
               <MenuItem p="1rem" onClick={handleLogout}>
                 <span className="icon">
                   <IoIosLogOut />
@@ -118,7 +155,6 @@ const MobileNav = () => {
         </div>
       </MobileNavContainer>
       <NavDrawer isOpen={isDrawerOpen} onClose={onCloseDrawer} />
-      {/* <NavDrawer isOpen={isOpen} onClose={onClose} /> */}
     </>
   );
 };

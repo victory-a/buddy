@@ -15,8 +15,10 @@ const CustomModal = ({
   type = "padded",
   title = "",
   isCentered = true,
+  // initialFocusRef=null,
   ...props
 }) => {
+  // const ref={focusRef}
   return (
     <SlideIn in={isOpen}>
       {() => (
@@ -26,6 +28,7 @@ const CustomModal = ({
           isCentered={isCentered}
           closeOnOverlayClick={overlayClose}
           onClose={onClose}
+          initialFocusRef={props.initialFocusRef ?? null}
           {...props}
         >
           <ModalOverlay bg="hsla(222, 74%, 17%, 0.4)" />

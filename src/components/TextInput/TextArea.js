@@ -1,8 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { useField } from "formik";
 import { Container, Label, Span, ErrorSpan, CustomTextArea } from "./styles";
 
-const TextArea = ({ label, type = "text", ...props }) => {
+const TextArea = ({ label, type = "text", ...props }, ref) => {
   const [field, meta] = useField(props);
 
   return (
@@ -12,8 +12,7 @@ const TextArea = ({ label, type = "text", ...props }) => {
         <CustomTextArea
           as="textarea"
           placeholder="Here is a sample placeholder"
-          // size="100%"
-          // maxLength={160}
+          ref={ref}
           {...field}
           {...props}
         />
@@ -24,4 +23,4 @@ const TextArea = ({ label, type = "text", ...props }) => {
   );
 };
 
-export default TextArea;
+export default forwardRef(TextArea);

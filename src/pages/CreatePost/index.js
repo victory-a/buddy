@@ -17,7 +17,7 @@ const CreatePost = ({ isOpen, onClose }) => {
   const { setPageTitle } = usePageDetails();
   const { doToast } = useCustomToast();
   const [mutate, { status, error }] = useMutation(createPost);
-  // const focusRef = React.useRef();
+  const focusRef = React.useRef();
 
   React.useLayoutEffect(() => {
     setPageTitle("Post");
@@ -29,7 +29,7 @@ const CreatePost = ({ isOpen, onClose }) => {
       onSuccess: async () => {
         await queryCache.invalidateQueries("user");
         doToast("Success", "Post succesfully created!");
-        onClose();
+        // onClose();
       }
     });
   }
@@ -40,7 +40,7 @@ const CreatePost = ({ isOpen, onClose }) => {
       onClose={onClose}
       overlayClose={true}
       isCentered={false}
-      // initialFocusRef={focusRef}
+      initialFocusRef={focusRef}
       size={{ base: "90%", tablet: "55%", laptop: "530px" }}
       title="Create Post"
     >
@@ -56,7 +56,8 @@ const CreatePost = ({ isOpen, onClose }) => {
               placeholder="Hey! Whats happening........"
               label=""
               height="12rem"
-              // ref={focusRef}
+              tabIndex={0}
+              ref={focusRef}
             />
             <ShowError
               status={status}

@@ -51,6 +51,7 @@ const tabOptions = [
 
 const Profile = () => {
   const { setPageTitle } = usePageDetails();
+  const focusRef = React.useRef();
   const { user } = useUserDetails();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [progressValue, stetProgressValue] = React.useState(0);
@@ -84,9 +85,11 @@ const Profile = () => {
         onClose={onClose}
         overlayClose={false}
         title="Edit Profile"
-        size={{ base: "90%", tablet: "55%", laptop: "530px" }}
+        size={{ base: "80%", tablet: "55%", laptop: "530px" }}
+        scrollBehavior={isTablet ? "inside" : "outside"}
+        initialFocusRef={focusRef}
       >
-        <EditProfile onClose={onClose} />
+        <EditProfile onClose={onClose} focusRef={focusRef} />
       </Modal>
 
       <ProfileImageWrapper>

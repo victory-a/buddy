@@ -81,6 +81,13 @@ async function resetPassword(payload) {
   });
 }
 
+async function updatePassword(payload) {
+  return await client("auth/updatepassword", {
+    body: payload,
+    method: "PUT"
+  });
+}
+
 function logout() {
   Cookies.remove(config.TOKEN);
   return Promise.resolve();
@@ -113,6 +120,7 @@ export {
   logout,
   forgotPassword,
   resetPassword,
+  updatePassword,
   useUserDetails,
   checkTokenValidity,
   updateUser

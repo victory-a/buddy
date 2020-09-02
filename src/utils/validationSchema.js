@@ -48,6 +48,13 @@ export const resetPasswordSchema = () =>
     confirmPassword: confirmPassword()
   });
 
+export const updatePasswordSchema = () =>
+  Yup.object().shape({
+    currentPassword: validatePassword(),
+    newPassword: validatePassword(),
+    confirmPassword: confirmPassword()
+  });
+
 export const editProfileSchema = () =>
   Yup.object().shape({
     firstName: validateFirstName(),
@@ -64,5 +71,5 @@ export const createPostSchema = () =>
     text: Yup.string()
       .required()
       .label("Post")
-      .max("300", "cannot exceed 300 characters")
+      .max(160, "cannot exceed 300 characters")
   });

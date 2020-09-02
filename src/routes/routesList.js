@@ -9,6 +9,7 @@ const Home = lazy(() => import("pages/Home"));
 const Profile = lazy(() => import("pages/Profile"));
 const Post = lazy(() => import("pages/CreatePost"));
 const Send = lazy(() => import("pages/Send"));
+const Settings = lazy(() => import("pages/Settings"));
 
 const routes = [
   {
@@ -70,6 +71,12 @@ const routes = [
     exact: true,
     isPrivate: true,
     component: Post
+  },
+  {
+    path: "/settings",
+    exact: true,
+    isPrivate: true,
+    component: Settings
   },
   {
     path: "*",

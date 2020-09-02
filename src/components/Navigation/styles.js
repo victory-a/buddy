@@ -44,6 +44,30 @@ const MobileNavContainer = styled.div`
 const NavListContainer = styled.nav`
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  & .nav-menu {
+    justify-self: flex-end;
+    align-self: center;
+    position: absolute;
+    display: block;
+    bottom: 3%;
+    transform: translateY(3%);
+
+    img {
+      width: 5rem;
+      height: 5rem;
+      margin-left: auto;
+    }
+
+    span.icon {
+      margin-right: 0.5rem;
+
+      svg {
+        width: 20px;
+      }
+    }
+  }
 `;
 
 const NavLogoContainer = styled.div`

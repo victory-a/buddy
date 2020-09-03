@@ -1,6 +1,8 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import { queryCache, useMutation } from "react-query";
+import { useDisclosure } from "@chakra-ui/core";
+import { useHistory } from "react-router-dom";
 
 import { createPost } from "lib/post-client";
 import useCustomToast from "hooks/useCustomToast";
@@ -13,10 +15,11 @@ import { Spinner } from "components/loaders.js";
 import Modal from "components/Modal";
 import Button from "components/Button";
 
-const CreatePost = ({ isOpen, onClose }) => {
+const CreatePost = () => {
   const { setPageTitle } = usePageDetails();
   const { doToast } = useCustomToast();
   const [mutate, { status, error }] = useMutation(createPost);
+  const history = useHistory();
   const focusRef = React.useRef();
 
   React.useLayoutEffect(() => {
@@ -29,15 +32,15 @@ const CreatePost = ({ isOpen, onClose }) => {
       onSuccess: async () => {
         await queryCache.invalidateQueries("user");
         doToast("Success", "Post succesfully created!");
-        // onClose();
+        history.goBack();
       }
     });
   }
 
   return (
     <Modal
-      isOpen={isOpen}
-      onClose={onClose}
+      isOpen={true}
+      onClose={() => history.goBack()}
       overlayClose={true}
       isCentered={false}
       initialFocusRef={focusRef}

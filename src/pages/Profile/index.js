@@ -7,6 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import "react-circular-progressbar/dist/styles.css";
 
 import { useUserDetails } from "lib/user-client";
+import computeProfileProgress from "utils/progress";
 
 import Modal from "components/Modal";
 import Following from "./Tabs/Following";
@@ -54,7 +55,7 @@ const Profile = () => {
   const focusRef = React.useRef();
   const { user } = useUserDetails();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [progressValue, stetProgressValue] = React.useState(0);
+  const [progressValue, setProgressValue] = React.useState(0);
 
   // const [mutate, { status, error }] = useMutation();
 
@@ -62,7 +63,8 @@ const Profile = () => {
   React.useEffect(() => {
     function updateProfileProgress() {
       return setTimeout(() => {
-        stetProgressValue(user?.progress ?? 0);
+        const progress = computeProfileProgress(user);
+        setProgressValue(progress);
       }, 200);
     }
     updateProfileProgress();
@@ -102,6 +104,7 @@ const Profile = () => {
           })}
         />
         <Image
+          // size="100px"
           rounded="full"
           src={user?.photo}
           fallbackSrc={user?.gender === "female" ? femaleFB : maleFB}

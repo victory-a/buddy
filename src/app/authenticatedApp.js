@@ -4,6 +4,7 @@ import ProtectedRoute from "routes/ProtectedRoute";
 import routesList from "routes/routesList";
 import { FullPageSpinner } from "components/loaders.js";
 import AppLayout from "layout/AppLayout";
+import SkeletonLoader from "components/loaders.js/SkeletonLoader";
 
 const AuthenticatedApp = () => {
   const privateRoutes = routesList.filter(route => route.isPrivate);
@@ -11,7 +12,7 @@ const AuthenticatedApp = () => {
   return (
     <Router>
       <AppLayout>
-        <Suspense fallback={<FullPageSpinner />}>
+        <Suspense fallback={<SkeletonLoader />}>
           <Switch>
             {privateRoutes.map(({ component, ...rest }, index) => (
               <ProtectedRoute

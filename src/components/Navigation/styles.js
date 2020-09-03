@@ -26,7 +26,7 @@ const MobileNavContainer = styled.div`
     text-align: end;
 
     img {
-      width: auto;
+      width: 2.5rem;
       height: 2.5rem;
       margin-left: auto;
     }
@@ -55,9 +55,14 @@ const NavListContainer = styled.nav`
     transform: translateY(3%);
 
     img {
-      width: 5rem;
-      height: 5rem;
+      width: 4rem;
+      height: 4rem;
       margin-left: auto;
+
+      @media ${device.tablet} {
+        width: 5rem;
+        height: 5rem;
+      }
     }
 
     span.icon {

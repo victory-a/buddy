@@ -63,6 +63,8 @@ export const editProfileSchema = () =>
     gender: validateGender(),
     bio: Yup.string()
       .trim()
+      .min(3)
+      .label("bio")
       .max(160, "bio cannot exceed 160 characters")
   });
 

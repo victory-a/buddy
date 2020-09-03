@@ -49,13 +49,17 @@ const ProfileImageWrapper = styled.div`
 
   img {
     position: absolute;
+    height: auto;
     width: 6.5rem;
+    height: 6.5rem;
     top: 50%;
     left: 50%;
+    object-fit: cover;
     transform: translate(-50%, -50%);
 
     @media ${device.tablet} {
-      width: 10.5rem;
+      width: 10rem;
+      height: 10rem;
     }
   }
 

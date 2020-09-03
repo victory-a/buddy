@@ -2,8 +2,7 @@ import React from "react";
 import { NavLink, Link, useLocation, useHistory } from "react-router-dom";
 import { RiMenu2Line } from "react-icons/ri";
 import { IoIosLogOut, IoIosSettings } from "react-icons/io";
-import { RiQuillPenLine } from "react-icons/ri";
-import { useDisclosure, Image } from "@chakra-ui/core";
+import { Image } from "@chakra-ui/core";
 
 import { useAuth } from "contexts/AuthContext";
 import { usePageDetails, NonMobileScreen } from "layout/AppLayout";
@@ -15,7 +14,7 @@ import Drawer, { useDrawer } from "components/Drawer";
 import maleFB from "assets/male-fb.svg";
 import femaleFB from "assets/female-fb.svg";
 import { ReactComponent as Logo } from "assets/logo.svg";
-import CreatePost from "pages/CreatePost";
+
 import {
   NavListContainer,
   NavLogoContainer,
@@ -30,7 +29,6 @@ const MainNav = () => {
   const { pathname } = useLocation();
   const { push } = useHistory();
   const { user } = useUserDetails();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { handleLogout } = useAuth();
 
   return (
@@ -63,13 +61,13 @@ const MainNav = () => {
             </NavListItem>
           );
         })}
-        <NavListItem>
+        {/* <NavListItem>
           <div className="toggle-post-modal" onClick={onOpen}>
             <RiQuillPenLine />
             <span>Post</span>
             <CreatePost isOpen={isOpen} onClose={onClose} />
           </div>
-        </NavListItem>
+        </NavListItem> */}
       </NavList>
 
       <NonMobileScreen>

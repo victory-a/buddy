@@ -97,6 +97,15 @@ async function updateUser(payload) {
   return await client("auth/updatedetails", { body: payload, method: "PUT" });
 }
 
+async function saveImageToCloudinary(payload) {
+  const res = await fetch(config.UPLOAD_URL, {
+    body: payload,
+    method: "POST"
+  });
+  const file = await res.json();
+  return file;
+}
+
 // react query utils
 function fetchUserDetails() {
   return queryCache.getQueryData("user");
@@ -123,5 +132,6 @@ export {
   updatePassword,
   useUserDetails,
   checkTokenValidity,
-  updateUser
+  updateUser,
+  saveImageToCloudinary
 };

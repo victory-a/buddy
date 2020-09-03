@@ -2,9 +2,10 @@ import React from "react";
 import { Image, Box } from "@chakra-ui/core";
 import { Formik, Form } from "formik";
 import { queryCache, useMutation } from "react-query";
+import config from "config";
 
 import { editProfileSchema } from "utils/validationSchema";
-import { useUserDetails, updateUser } from "lib/user-client";
+import { useUserDetails, updateUser, saveImageToCloudinary } from "lib/user-client";
 
 import { FaCamera } from "react-icons/fa";
 import maleFB from "assets/male-fb.svg";
@@ -47,6 +48,7 @@ const genderArr = [
 const EditProfile = ({ onClose, focusRef }) => {
   const { user } = useUserDetails();
   const { doToast } = useCustomToast();
+  const fileRef = React.useRef();
 
   const [mutate, { status, error }] = useMutation(updateUser);
 
@@ -60,13 +62,29 @@ const EditProfile = ({ onClose, focusRef }) => {
   };
 
   async function handleSubmit(values) {
-    await mutate(values, {
-      onSuccess: async () => {
-        await queryCache.invalidateQueries("user");
-        doToast("Success", "Profile succesfully updated!");
-        onClose();
+    let imageUrl;
+    const image = fileRef.current.files[0];
+    if (image?.size >= 50000) {
+      doToast("Error", "image should be less than 50kb", "error");
+    } else if (image) {
+      const data = new FormData();
+      data.append("file", image);
+      data.append("upload_preset", config.UPLOAD_PRESET);
+
+      const file = await saveImageToCloudinary(data);
+      imageUrl = file.secure_url;
+    }
+
+    await mutate(
+      { photo: imageUrl, ...values },
+      {
+        onSuccess: async () => {
+          await queryCache.invalidateQueries("user");
+          doToast("Success", "Profile succesfully updated!");
+          onClose();
+        }
       }
-    });
+    );
   }
 
   return (
@@ -77,18 +95,19 @@ const EditProfile = ({ onClose, focusRef }) => {
         </Tip>
         <ProfileImageWrapper>
           <label htmlFor="upload-img">
-            {/* <input
+            <input
               type="file"
               id="upload-img"
               name="user-image"
+              accept=".jpg,.png"
               style={{ display: "none" }}
-              onChange={handleImageUpload}
-            /> */}
+              ref={fileRef}
+            />
 
             <Image
               size="100px"
               rounded="full"
-              src={user?.image}
+              src={user?.photo}
               alt={`${user?.first_name} ${user?.last_name}`}
               aria-label="upload profile image"
               fallbackSrc={user?.gender === "female" ? femaleFB : maleFB}

@@ -3,14 +3,14 @@ import { device } from "styles";
 import colors from "styles/colors";
 
 const ProfileContainer = styled.section`
-  padding: 1.3rem;
+  padding: 1.3rem 0;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   @media ${device.laptop} {
-    padding: 2rem;
+    padding: 2rem 0;
 
     h2 {
       margin-bottom: 0.5rem;
@@ -127,7 +127,7 @@ const ConnectionStats = styled.div`
 // TABS STYLE
 const TabContainer = styled.section`
   margin: 1.5rem 0;
-  width: 90%;
+  width: 100%;
 `;
 const TabWrapper = styled.div`
   min-height: 50vh;

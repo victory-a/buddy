@@ -21,7 +21,7 @@ const Settings = () => {
   // const focusRef = React.useRef();
 
   React.useLayoutEffect(() => {
-    setPageTitle("Post");
+    setPageTitle("Settings");
     document.title = "Buddy | Update Password";
   }, [setPageTitle]);
 

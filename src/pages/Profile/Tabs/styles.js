@@ -12,15 +12,19 @@ const PostWrapper = styled.div`
   border-bottom: 0.5px solid rgba(18, 39, 140, 0.1);
   display: flex;
   align-items: flex-end;
+  /* border: 1px solid red; */
 `;
 
 const ImageWrapper = styled.div`
   margin-right: 0.8rem;
   align-self: flex-start;
+  width: 3rem;
+  height: 3rem;
 
   img {
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 100%;
+    height: 100%;
+    object-fit: center;
   }
 `;
 

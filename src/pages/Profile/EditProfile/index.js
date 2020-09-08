@@ -80,6 +80,8 @@ const EditProfile = ({ onClose, focusRef }) => {
       {
         onSuccess: async () => {
           await queryCache.invalidateQueries("user");
+          await queryCache.invalidateQueries("fetchUsersLikes");
+          await queryCache.invalidateQueries("fetchUsersPosts");
           doToast("Success", "Profile succesfully updated!");
           onClose();
         }

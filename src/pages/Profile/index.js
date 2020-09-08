@@ -39,25 +39,23 @@ const tabOptions = [
   { label: "Followers", content: Followers }
 ];
 
-const user = {
-  progress: 60,
-  firstName: "Ekezie",
-  lastName: "David",
-  following: 2,
-  followers: 1670,
-  posts: ["hello world", "whats popping"],
-  bio:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam iure quae nostrum ipsam neque soluta aperiam."
-};
+// const user = {
+//   progress: 60,
+//   firstName: "Ekezie",
+//   lastName: "David",
+//   following: 2,
+//   followers: 1670,
+//   posts: ["hello world", "whats popping"],
+//   bio:
+//     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam iure quae nostrum ipsam neque soluta aperiam."
+// };
 
 const Profile = () => {
   const { setPageTitle } = usePageDetails();
   const focusRef = React.useRef();
-  // const { user } = useUserDetails();
+  const { user } = useUserDetails();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [progressValue, setProgressValue] = React.useState(0);
-
-  // const [mutate, { status, error }] = useMutation();
 
   // controls the animation delay for prfile progress bar
   React.useEffect(() => {
@@ -68,7 +66,7 @@ const Profile = () => {
       }, 200);
     }
     updateProfileProgress();
-  }, []);
+  }, [user]);
 
   React.useLayoutEffect(() => {
     setPageTitle("Profile");

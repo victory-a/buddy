@@ -1,12 +1,10 @@
 import React from "react";
 import { Image, Tabs, TabList, TabPanels, Tab, TabPanel, useDisclosure } from "@chakra-ui/core";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-// import { queryCache, useMutation } from "react-query";
-// import { updateUser } from "lib/user-client";
 import { useMediaQuery } from "react-responsive";
 import "react-circular-progressbar/dist/styles.css";
 
-import { useUserDetails } from "lib/user-client";
+import { useUserDetails } from "lib/auth-client";
 import computeProfileProgress from "utils/progress";
 
 import Modal from "components/Modal";
@@ -39,25 +37,12 @@ const tabOptions = [
   { label: "Followers", content: Followers }
 ];
 
-// const user = {
-//   progress: 60,
-//   firstName: "Ekezie",
-//   lastName: "David",
-//   following: 2,
-//   followers: 1670,
-//   posts: ["hello world", "whats popping"],
-//   bio:
-//     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam iure quae nostrum ipsam neque soluta aperiam."
-// };
-
 const Profile = () => {
   const { setPageTitle } = usePageDetails();
   const focusRef = React.useRef();
   const { user } = useUserDetails();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [progressValue, setProgressValue] = React.useState(0);
-
-  // const [mutate, { status, error }] = useMutation();
 
   // controls the animation delay for prfile progress bar
   React.useEffect(() => {
@@ -104,7 +89,6 @@ const Profile = () => {
           })}
         />
         <Image
-          // size="100px"
           rounded="full"
           src={user?.photo}
           fallbackSrc={user?.gender === "female" ? femaleFB : maleFB}

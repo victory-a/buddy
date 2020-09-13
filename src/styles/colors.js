@@ -7,5 +7,6 @@ export default {
   grey: "#495057",
   black: "#000",
   error: "#f84f31",
+  red: "ff0000",
   waterBlue: "#F3F5FC"
 };

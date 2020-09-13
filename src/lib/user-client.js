@@ -1,97 +1,6 @@
-import { queryCache, useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import config from "config";
 import client from "./client";
-import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
-
-function getToken() {
-  let token = null;
-  const userToken = Cookies.get(config.TOKEN);
-
-  if (userToken) {
-    token = JSON.parse(userToken);
-    return token;
-  }
-
-  return token;
-}
-
-function checkTokenValidity(returnFn) {
-  const token = getToken();
-  if (token) {
-    const decoded = jwt_decode(token);
-    const currentTime = Date.now() / 1000;
-    if (decoded.exp < currentTime) returnFn();
-  }
-}
-
-async function getUser() {
-  const token = getToken();
-
-  if (!token) {
-    return Promise.resolve(null);
-  }
-
-  try {
-    return await client("auth/currentuser");
-  } catch (error) {
-    logout();
-
-    return Promise.reject(error);
-  }
-}
-
-async function handleUserResoponse({ token }) {
-  if (token) {
-    await Cookies.set(config.TOKEN, JSON.stringify(token), {
-      expires: 1,
-      secure: process.env.NODE_ENV === "production"
-    });
-  }
-
-  try {
-    return await client("auth/currentuser");
-  } catch (error) {
-    logout();
-
-    return Promise.reject(error);
-  }
-}
-
-async function register(payload) {
-  const response = await client("auth/register", { body: payload });
-  return handleUserResoponse(response);
-}
-
-async function login(payload) {
-  const response = await client("auth/login", { body: payload });
-  return handleUserResoponse(response);
-}
-
-async function forgotPassword(payload) {
-  return await client("auth/forgotpassword", { body: payload });
-}
-
-async function resetPassword(payload) {
-  const [data, resetToken] = payload;
-
-  return await client(`auth/resetpassword/${resetToken}`, {
-    body: data,
-    method: "PUT"
-  });
-}
-
-async function updatePassword(payload) {
-  return await client("auth/updatepassword", {
-    body: payload,
-    method: "PUT"
-  });
-}
-
-function logout() {
-  Cookies.remove(config.TOKEN);
-  return Promise.resolve();
-}
 
 async function updateUser(payload) {
   return await client("auth/updatedetails", { body: payload, method: "PUT" });
@@ -106,32 +15,36 @@ async function saveImageToCloudinary(payload) {
   return file;
 }
 
-// react query utils
-function fetchUserDetails() {
-  return queryCache.getQueryData("user");
+function getFollowers(userId) {
+  return client(`users/${userId}/followers`).then(data => data.data);
 }
 
-// synchronize the current user object value (if any) with the user value from authContext
-function useUserDetails() {
-  let user;
-  const { data, status } = useQuery("userDetails", fetchUserDetails);
-
-  if (data) user = data.user;
-  else user = null;
-  return { user, status };
+function getFollowing(userId) {
+  return client(`users/${userId}/following`).then(data => data.data);
 }
 
-export {
-  getToken,
-  getUser,
-  register,
-  login,
-  logout,
-  forgotPassword,
-  resetPassword,
-  updatePassword,
-  useUserDetails,
-  checkTokenValidity,
-  updateUser,
-  saveImageToCloudinary
-};
+function useFollowers(userId) {
+  const { data: followers } = useQuery({
+    queryKey: "followers",
+    queryFn: () => getFollowers(userId)
+  });
+  return followers ?? [];
+}
+
+function useFollowing(userId) {
+  const { data: following } = useQuery({
+    queryKey: "following",
+    queryFn: () => getFollowing(userId)
+  });
+  return following ?? [];
+}
+
+function useUnfollow() {
+  return useMutation(userId => client(`users/unfollow/${userId}`, { method: "PUT" }));
+}
+
+function useFollow() {
+  return useMutation(userId => client(`users/follow/${userId}`, { method: "PUT" }));
+}
+
+export { updateUser, saveImageToCloudinary, useFollowers, useFollowing, useFollow, useUnfollow };

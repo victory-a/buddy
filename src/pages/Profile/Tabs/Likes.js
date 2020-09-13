@@ -5,18 +5,20 @@ import { useUserDetails } from "lib/auth-client";
 import Post from "./Post";
 import { PostsContainer } from "./styles";
 
+import { PostSkeleton } from "components/loaders.js/SkeletonLoader";
+
 const Likes = () => {
   const { user } = useUserDetails();
-  const { data: likedPosts, status } = useFetchUsersLiked(user.id);
+  const { likedPosts, status } = useFetchUsersLiked(user.id);
 
-  return (
+  return status === "success" ? (
     <PostsContainer>
-      {likedPosts
-        ? likedPosts.map(post => (
-            <Post post={post.post} author={post.author} showStats={false} key={post._id} />
-          ))
-        : null}
+      {likedPosts.map(post => (
+        <Post post={post.post} author={post.author} showStats={false} key={post._id} />
+      ))}
     </PostsContainer>
+  ) : (
+    <PostSkeleton />
   );
 };
 

@@ -23,12 +23,11 @@ function useFetchUsersPosts(userId) {
 }
 
 function useFetchUsersLiked(userId) {
-  const { data, status } = useQuery({
+  const { data: likedPosts, status } = useQuery({
     queryKey: "fetchUsersLikes",
     queryFn: () => client(`users/${userId}/liked`).then(data => data.data)
   });
-
-  return { data, status };
+  return { likedPosts, status };
 }
 
 function useLikePost() {

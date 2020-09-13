@@ -6,8 +6,8 @@ import { useUserDetails } from "lib/auth-client";
 import { useFollowing, useUnfollow } from "lib/user-client";
 
 import { FollowingButton } from "components/Button";
-import maleFB from "assets/male-fb.svg";
 import { PostsContainer, PostWrapper, ImageWrapper2, PostDetails, PostText } from "./styles";
+import { PostSkeleton } from "components/loaders.js/SkeletonLoader";
 
 export const FollowingUser = ({ user }) => {
   const [mutate] = useUnfollow();
@@ -25,11 +25,7 @@ export const FollowingUser = ({ user }) => {
   return (
     <PostWrapper>
       <ImageWrapper2>
-        <Avatar
-          rounded="full"
-          src={user.photo ?? maleFB}
-          name={`${user?.firstName} ${user?.lastName}`}
-        />
+        <Avatar rounded="full" src={user?.photo} name={`${user?.firstName} ${user?.lastName}`} />
       </ImageWrapper2>
 
       <PostDetails>
@@ -45,14 +41,16 @@ export const FollowingUser = ({ user }) => {
 
 const Following = () => {
   const { user } = useUserDetails();
-  const following = useFollowing(user.id);
+  const { following, status } = useFollowing(user.id);
 
-  return (
+  return status === "success" ? (
     <PostsContainer>
       {following?.map(({ followed }) => (
         <FollowingUser user={followed} key={`following-${followed._id}`} />
       ))}
     </PostsContainer>
+  ) : (
+    <PostSkeleton />
   );
 };
 

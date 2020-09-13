@@ -3,28 +3,25 @@ import { queryCache } from "react-query";
 import { Avatar, Box } from "@chakra-ui/core";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsReplyFill } from "react-icons/bs";
+import { checkTokenValidity, useUserDetails } from "lib/auth-client";
 
-import { useFetchUsersPosts, useLikePost } from "lib/post-client";
-import { useUserDetails } from "lib/auth-client";
+import { useLikePost } from "lib/post-client";
 
 import { PostWrapper, ImageWrapper, PostText, PostDetails, Insights, InsightGroup } from "./styles";
 
 const Post = ({ post, author, showStats = true }) => {
   const [mutate] = useLikePost();
+  const { user } = useUserDetails();
 
   return (
     <PostWrapper>
       <ImageWrapper>
-        <Avatar
-          // rounded="full"
-          src={author?.photo}
-          name={`${author?.firstName} ${author?.lastName}`}
-        />
+        <Avatar src={author?.photo} name={`${author?.firstName} ${author?.lastName}`} />
       </ImageWrapper>
 
       <PostDetails>
         <h3>{`${author?.firstName} ${author?.lastName}` ?? ""}</h3>
-        <PostText>{post.text}</PostText>
+        <PostText>{user.bio}</PostText>
         {showStats ? (
           <Insights>
             <InsightGroup>

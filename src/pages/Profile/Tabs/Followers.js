@@ -5,10 +5,9 @@ import { queryCache } from "react-query";
 import { useUserDetails } from "lib/auth-client";
 import { useFollowers, useFollow, useUnfollow } from "lib/user-client";
 
-import { PostsContainer, PostWrapper, ImageWrapper2, PostDetails, PostText } from "./styles";
 import { FollowersButton } from "components/Button";
-
-import maleFB from "assets/male-fb.svg";
+import { PostSkeleton } from "components/loaders.js/SkeletonLoader";
+import { PostsContainer, PostWrapper, ImageWrapper2, PostDetails, PostText } from "./styles";
 
 const FollowersUser = ({ user, following = false }) => {
   const [followMutation] = useFollow();
@@ -36,7 +35,7 @@ const FollowersUser = ({ user, following = false }) => {
   return (
     <PostWrapper>
       <ImageWrapper2>
-        <Avatar src={user.photo ?? maleFB} name={`${user?.firstName} ${user?.lastName}`} />
+        <Avatar src={user?.photo} name={`${user?.firstName} ${user?.lastName}`} />
       </ImageWrapper2>
 
       <PostDetails>
@@ -59,15 +58,15 @@ const FollowersUser = ({ user, following = false }) => {
 
 const Followers = () => {
   const { user } = useUserDetails();
-  const followers = useFollowers(user.id);
+  const { followers, status } = useFollowers(user.id);
 
   const mutualFollowing =
     queryCache
       .getQueryData("following")
       ?.filter(({ follower }) => follower === user.id)
-      .map(({ followed }) => followed.id) ?? [];
+      ?.map(({ followed }) => followed.id) ?? [];
 
-  return (
+  return status === "success" ? (
     <PostsContainer>
       {followers?.map(({ follower }) => (
         <FollowersUser
@@ -77,6 +76,8 @@ const Followers = () => {
         />
       ))}
     </PostsContainer>
+  ) : (
+    <PostSkeleton />
   );
 };
 

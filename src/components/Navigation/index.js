@@ -61,13 +61,6 @@ const MainNav = () => {
             </NavListItem>
           );
         })}
-        {/* <NavListItem>
-          <div className="toggle-post-modal" onClick={onOpen}>
-            <RiQuillPenLine />
-            <span>Post</span>
-            <CreatePost isOpen={isOpen} onClose={onClose} />
-          </div>
-        </NavListItem> */}
       </NavList>
 
       <NonMobileScreen>

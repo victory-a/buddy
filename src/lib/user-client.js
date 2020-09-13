@@ -24,19 +24,19 @@ function getFollowing(userId) {
 }
 
 function useFollowers(userId) {
-  const { data: followers } = useQuery({
+  const { data: followers, status } = useQuery({
     queryKey: "followers",
     queryFn: () => getFollowers(userId)
   });
-  return followers ?? [];
+  return { followers, status };
 }
 
 function useFollowing(userId) {
-  const { data: following } = useQuery({
+  const { data: following, status } = useQuery({
     queryKey: "following",
     queryFn: () => getFollowing(userId)
   });
-  return following ?? [];
+  return { following, status };
 }
 
 function useUnfollow() {

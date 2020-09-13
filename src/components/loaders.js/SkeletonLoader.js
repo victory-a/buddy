@@ -27,7 +27,7 @@ const Container = styled.div`
 `;
 const SkeletonLoader = () => {
   const isDesktop = useMediaQuery({
-    query: "{min-width: 1441px"
+    query: "(min-width: 1441px)"
   });
 
   return (
@@ -55,6 +55,57 @@ const SkeletonLoader = () => {
           </div>
         )}
       </Container>
+    </SkeletonTheme>
+  );
+};
+
+const PostsWrapper = styled.div`
+  width: 100%;
+  flex-direction: column;
+
+  @media ${device.laptop} {
+    padding: 2rem;
+  }
+
+  .post {
+    display: flex;
+    margin: 0.5em 0 3.5rem;
+    width: 100%;
+    align-items: center;
+  }
+
+  .avatar {
+    margin: 0 1rem;
+  }
+
+  .text {
+    width: 80%;
+  }
+`;
+
+const Post = () => {
+  return (
+    <div className="post">
+      <div className="avatar">
+        <Skeleton circle={true} height={40} width={40} />
+      </div>
+      <div className="text">
+        <Skeleton duration={1} height={40} />
+      </div>
+    </div>
+  );
+};
+
+export const PostSkeleton = () => {
+  return (
+    <SkeletonTheme color="rgba(10,46,101,0.04)" highlightColor="rgba(186, 198, 216, 0.04)">
+      <PostsWrapper>
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+      </PostsWrapper>
     </SkeletonTheme>
   );
 };

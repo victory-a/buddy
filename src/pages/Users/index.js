@@ -8,7 +8,7 @@ const Transfer = () => {
     setPageTitle("Send Money");
     document.title = "Buddy | Send Money";
   }, [setPageTitle]);
-  return <div>Send</div>;
+  return <div>Users</div>;
 };
 
 export default Transfer;

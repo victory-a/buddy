@@ -5,7 +5,8 @@ import { queryCache, useMutation } from "react-query";
 import config from "config";
 
 import { editProfileSchema } from "utils/validationSchema";
-import { useUserDetails, updateUser, saveImageToCloudinary } from "lib/user-client";
+import { useUserDetails } from "lib/auth-client";
+import { saveImageToCloudinary, updateUser } from "lib/user-client";
 
 import { FaCamera } from "react-icons/fa";
 import maleFB from "assets/male-fb.svg";
@@ -80,6 +81,8 @@ const EditProfile = ({ onClose, focusRef }) => {
       {
         onSuccess: async () => {
           await queryCache.invalidateQueries("user");
+          await queryCache.invalidateQueries("fetchUsersLikes");
+          await queryCache.invalidateQueries("fetchUsersPosts");
           doToast("Success", "Profile succesfully updated!");
           onClose();
         }

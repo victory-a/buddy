@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Link, useHistory } from "react-router-dom";
 
 import { resetPasswordSchema } from "utils/validationSchema";
-import { resetPassword } from "lib/user-client";
+import { resetPassword } from "lib/auth-client";
 
 import PasswordInput from "components/TextInput/PasswordInput";
 import Button from "components/Button";

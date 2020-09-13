@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "config";
-import { getToken } from "./user-client";
+import { getToken } from "./auth-client";
 
 export default async function client(endpoint, { body, ...customConfig } = {}) {
   const token = getToken();

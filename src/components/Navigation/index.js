@@ -6,7 +6,7 @@ import { Image } from "@chakra-ui/core";
 
 import { useAuth } from "contexts/AuthContext";
 import { usePageDetails, NonMobileScreen } from "layout/AppLayout";
-import { useUserDetails } from "lib/user-client";
+import { useUserDetails } from "lib/auth-client";
 import navList from "routes/navList";
 
 import Drawer, { useDrawer } from "components/Drawer";
@@ -61,13 +61,6 @@ const MainNav = () => {
             </NavListItem>
           );
         })}
-        {/* <NavListItem>
-          <div className="toggle-post-modal" onClick={onOpen}>
-            <RiQuillPenLine />
-            <span>Post</span>
-            <CreatePost isOpen={isOpen} onClose={onClose} />
-          </div>
-        </NavListItem> */}
       </NavList>
 
       <NonMobileScreen>

@@ -12,7 +12,10 @@ const PostWrapper = styled.div`
   border-bottom: 0.5px solid rgba(18, 39, 140, 0.1);
   display: flex;
   align-items: flex-end;
-  /* border: 1px solid red; */
+
+  &:hover {
+    background-color: rgba(18, 39, 140, 0.1);
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -28,13 +31,30 @@ const ImageWrapper = styled.div`
   }
 `;
 
+const ImageWrapper2 = styled(ImageWrapper)`
+  width: 3rem;
+  height: auto;
+
+  @media ${device.tablet} {
+    width: 5rem;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: center;
+  }
+`;
+
 const PostDetails = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   h3 {
     font-size: 1.6rem;
     font-weight: bold;
+    text-transform: capitalize;
 
     @media ${device.mobile} {
       font-size: 1.4rem;
@@ -84,4 +104,15 @@ const InsightGroup = styled.span`
   }
 `;
 
-export { PostsContainer, PostWrapper, ImageWrapper, PostText, PostDetails, Insights, InsightGroup };
+// const
+
+export {
+  PostsContainer,
+  PostWrapper,
+  ImageWrapper,
+  ImageWrapper2,
+  PostText,
+  PostDetails,
+  Insights,
+  InsightGroup
+};

@@ -1,6 +1,6 @@
 import React from "react";
 import { useFetchUsersLiked } from "lib/post-client";
-import { useUserDetails } from "lib/user-client";
+import { useUserDetails } from "lib/auth-client";
 
 import Post from "./Post";
 import { PostsContainer } from "./styles";

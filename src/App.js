@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, lazy, Suspense } from "react";
 import { FullPageSpinner } from "components/loaders.js";
-import { checkTokenValidity, useUserDetails } from "lib/user-client";
+import { checkTokenValidity, useUserDetails } from "lib/auth-client";
 import { useAuth } from "contexts/AuthContext";
 
 const loadAuthenticatedApp = () => import("app/authenticatedApp");

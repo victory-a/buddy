@@ -3,7 +3,7 @@ import { queryCache, useMutation } from "react-query";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 
-import { login } from "lib/user-client";
+import { login } from "lib/auth-client";
 import { signInSchema } from "utils/validationSchema";
 
 import TextInput from "components/TextInput";

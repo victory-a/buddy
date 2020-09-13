@@ -5,7 +5,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsReplyFill } from "react-icons/bs";
 
 import { useFetchUsersPosts, useLikePost } from "lib/post-client";
-import { useUserDetails } from "lib/user-client";
+import { useUserDetails } from "lib/auth-client";
 
 import { PostWrapper, ImageWrapper, PostText, PostDetails, Insights, InsightGroup } from "./styles";
 
@@ -35,7 +35,17 @@ const Post = ({ post, author, showStats = true }) => {
             </InsightGroup>
             <InsightGroup>
               {post.likes > 0 ? (
-                <Box d="flex">
+                <Box
+                  d="flex"
+                  onClick={() =>
+                    mutate(post.id, {
+                      onSuccess: () => {
+                        queryCache.invalidateQueries("fetchUsersPosts");
+                        queryCache.invalidateQueries("fetchUsersLikes");
+                      }
+                    })
+                  }
+                >
                   <AiFillHeart size={20} color="#ff0100" />
                   <p>{post?.likes ?? 0}</p>
                 </Box>
@@ -44,8 +54,10 @@ const Post = ({ post, author, showStats = true }) => {
                   d="flex"
                   onClick={() =>
                     mutate(post.id, {
-                      onSuccess: () =>
-                        queryCache.invalidateQueries("fetchUsersPosts", "fetchUsersLikes")
+                      onSuccess: () => {
+                        queryCache.invalidateQueries("fetchUsersPosts");
+                        queryCache.invalidateQueries("fetchUsersLikes");
+                      }
                     })
                   }
                 >

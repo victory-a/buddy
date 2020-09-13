@@ -21,7 +21,7 @@ const ProfileContainer = styled.section`
 const EditButton = styled.button`
   align-self: flex-end;
   margin-right: 0.8rem;
-  margin-top: -3rem;
+  margin-top: -1rem;
   font-size: 1.2rem;
   font-weight: 600;
   padding: 0.5rem 1.5rem;
@@ -65,7 +65,7 @@ const ProfileImageWrapper = styled.div`
 
   .progress-stat {
     position: absolute;
-    font-size: 0.6rem;
+    font-size: 0.3rem;
     font-weight: bold;
     color: #fff;
     top: 0;
@@ -78,6 +78,10 @@ const ProfileImageWrapper = styled.div`
     justify-content: center;
     background-color: ${colors.primary};
     border-radius: 50%;
+
+    @media ${device.mobile} {
+      font-size: 0.6rem;
+    }
 
     @media ${device.tablet} {
       font-size: 0.8rem;

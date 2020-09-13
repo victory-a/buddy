@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import { Link } from "react-router-dom";
 
 import { createAccountSchema } from "utils/validationSchema";
-import { register } from "lib/user-client";
+import { register } from "lib/auth-client";
 
 import TextInput from "components/TextInput";
 import Button from "components/Button";

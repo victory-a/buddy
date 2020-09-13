@@ -1,12 +1,10 @@
 import React from "react";
 import { Image, Tabs, TabList, TabPanels, Tab, TabPanel, useDisclosure } from "@chakra-ui/core";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-// import { queryCache, useMutation } from "react-query";
-// import { updateUser } from "lib/user-client";
 import { useMediaQuery } from "react-responsive";
 import "react-circular-progressbar/dist/styles.css";
 
-import { useUserDetails } from "lib/user-client";
+import { useUserDetails } from "lib/auth-client";
 import computeProfileProgress from "utils/progress";
 
 import Modal from "components/Modal";
@@ -38,17 +36,6 @@ const tabOptions = [
   { label: "Following", content: Following },
   { label: "Followers", content: Followers }
 ];
-
-// const user = {
-//   progress: 60,
-//   firstName: "Ekezie",
-//   lastName: "David",
-//   following: 2,
-//   followers: 1670,
-//   posts: ["hello world", "whats popping"],
-//   bio:
-//     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam iure quae nostrum ipsam neque soluta aperiam."
-// };
 
 const Profile = () => {
   const { setPageTitle } = usePageDetails();
@@ -102,7 +89,6 @@ const Profile = () => {
           })}
         />
         <Image
-          // size="100px"
           rounded="full"
           src={user?.photo}
           fallbackSrc={user?.gender === "female" ? femaleFB : maleFB}

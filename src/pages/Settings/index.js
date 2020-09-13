@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form } from "formik";
 import { queryCache, useMutation } from "react-query";
 
-import { updatePassword } from "lib/user-client";
+import { updatePassword } from "lib/auth-client";
 import useCustomToast from "hooks/useCustomToast";
 
 import { usePageDetails } from "layout/AppLayout";

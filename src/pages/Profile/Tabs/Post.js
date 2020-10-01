@@ -1,66 +1,75 @@
 import React from "react";
 import { queryCache } from "react-query";
-import { Avatar, Box } from "@chakra-ui/core";
+import { Avatar, Box, useDisclosure, Tooltip } from "@chakra-ui/core";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsReplyFill } from "react-icons/bs";
-import { checkTokenValidity, useUserDetails } from "lib/auth-client";
+import { useUserDetails } from "lib/auth-client";
 
-import { useLikePost } from "lib/post-client";
+import { useLikePost, useUnlikePost } from "lib/post-client";
 
+import Reply from "./Reply";
 import { PostWrapper, ImageWrapper, PostText, PostDetails, Insights, InsightGroup } from "./styles";
 
-const Post = ({ post, author, showStats = true }) => {
-  const [mutate] = useLikePost();
-  const { user } = useUserDetails();
+const Post = ({ post, author, likedByUser, showStats = true }) => {
+  const [likeMutation] = useLikePost();
+  const [unlikeMutation] = useUnlikePost();
+  const { onClose, onOpen, isOpen } = useDisclosure();
+
+  function handleLike(postId) {
+    return likeMutation(postId, {
+      onSuccess: () => {
+        queryCache.invalidateQueries("fetchAllPosts");
+        queryCache.invalidateQueries("fetchUsersLikes");
+        queryCache.invalidateQueries("fetchUsersPosts");
+      }
+    });
+  }
+
+  function handleUnlike(postId) {
+    return unlikeMutation(postId, {
+      onSuccess: () => {
+        queryCache.invalidateQueries("fetchAllPosts");
+        queryCache.invalidateQueries("fetchUsersLikes");
+        queryCache.invalidateQueries("fetchUsersPosts");
+      }
+    });
+  }
 
   return (
     <PostWrapper>
+      <Reply isOpen={isOpen} onClose={onClose} author={author} post={post} />
       <ImageWrapper>
         <Avatar src={author?.photo} name={`${author?.firstName} ${author?.lastName}`} />
       </ImageWrapper>
 
       <PostDetails>
         <h3>{`${author?.firstName} ${author?.lastName}` ?? ""}</h3>
-        <PostText>{user.bio}</PostText>
+        <PostText>{post.text}</PostText>
         {showStats ? (
           <Insights>
             <InsightGroup>
-              <Box d="flex">
-                <BsReplyFill size={20} />
-                <p>{post?.replies ?? 0}</p>
-              </Box>
+              <Tooltip hasArrow label="Reply post" bg="buddy.primary" placement="right">
+                <Box d="flex" onClick={onOpen}>
+                  <BsReplyFill size={20} />
+                  <p>{post?.replies ?? 0}</p>
+                </Box>
+              </Tooltip>
             </InsightGroup>
             <InsightGroup>
-              {post.likes > 0 ? (
-                <Box
-                  d="flex"
-                  onClick={() =>
-                    mutate(post.id, {
-                      onSuccess: () => {
-                        queryCache.invalidateQueries("fetchUsersPosts");
-                        queryCache.invalidateQueries("fetchUsersLikes");
-                      }
-                    })
-                  }
-                >
-                  <AiFillHeart size={20} color="#ff0100" />
-                  <p>{post?.likes ?? 0}</p>
-                </Box>
+              {likedByUser ? (
+                <Tooltip hasArrow label="Unlike post" bg="buddy.primary" placement="right">
+                  <Box d="flex" onClick={() => handleUnlike(post.id)}>
+                    <AiFillHeart size={20} color="#ff0100" />
+                    <p>{post?.likes ?? 0}</p>
+                  </Box>
+                </Tooltip>
               ) : (
-                <Box
-                  d="flex"
-                  onClick={() =>
-                    mutate(post.id, {
-                      onSuccess: () => {
-                        queryCache.invalidateQueries("fetchUsersPosts");
-                        queryCache.invalidateQueries("fetchUsersLikes");
-                      }
-                    })
-                  }
-                >
-                  <AiOutlineHeart size={20} />
-                  <p>{post?.likes ?? 0}</p>
-                </Box>
+                <Tooltip hasArrow label="Like post" bg="buddy.primary" placement="right">
+                  <Box d="flex" onClick={() => handleLike(post.id)}>
+                    <AiOutlineHeart size={20} />
+                    <p>{post?.likes ?? 0}</p>
+                  </Box>
+                </Tooltip>
               )}
             </InsightGroup>
           </Insights>

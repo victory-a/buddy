@@ -5,12 +5,17 @@ async function createPost(payload) {
   return await client("posts", { body: payload });
 }
 
-async function likePost(postId) {
-  return await client(`posts/like/${postId}`, { method: "PUT" });
+async function replyPost({ postId, values }) {
+  return await client(`posts/${postId}/reply`, { body: values });
 }
 
-async function unLikePost(postId) {
-  return await client(`posts/unlike/${postId}`, { method: "PUT" });
+function useFetchPosts() {
+  const { data, status } = useQuery({
+    queryKey: "fetchAllPosts",
+    queryFn: () => client("posts").then(data => data.data)
+  });
+
+  return { data, status };
 }
 
 function useFetchUsersPosts(userId) {
@@ -34,4 +39,16 @@ function useLikePost() {
   return useMutation(postId => client(`posts/like/${postId}`, { method: "PUT" }));
 }
 
-export { createPost, likePost, unLikePost, useFetchUsersPosts, useLikePost, useFetchUsersLiked };
+function useUnlikePost() {
+  return useMutation(postId => client(`posts/unlike/${postId}`, { method: "PUT" }));
+}
+
+export {
+  createPost,
+  replyPost,
+  useFetchPosts,
+  useUnlikePost,
+  useFetchUsersPosts,
+  useLikePost,
+  useFetchUsersLiked
+};

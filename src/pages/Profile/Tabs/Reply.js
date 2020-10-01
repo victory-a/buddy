@@ -1,9 +1,10 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import { queryCache, useMutation } from "react-query";
+import { useDisclosure, Avatar } from "@chakra-ui/core";
 import { useHistory } from "react-router-dom";
 
-import { createPost } from "lib/post-client";
+import { replyPost } from "lib/post-client";
 import useCustomToast from "hooks/useCustomToast";
 
 import { usePageDetails } from "layout/AppLayout";
@@ -14,38 +15,52 @@ import { Spinner } from "components/loaders.js";
 import Modal from "components/Modal";
 import Button from "components/Button";
 
-const CreatePost = () => {
+import { PostWrapper, ImageWrapper, PostText, PostDetails } from "./styles";
+
+const Reply = ({ isOpen, onClose, author, post }) => {
   const { setPageTitle } = usePageDetails();
   const { doToast } = useCustomToast();
-  const [mutate, { status, error }] = useMutation(createPost);
-  const history = useHistory();
   const focusRef = React.useRef();
+  const [mutate, { status, error }] = useMutation(replyPost);
+
+  function handleSubmit(values) {
+    return mutate(
+      { postId: post.id, values },
+      {
+        onSuccess: () => {
+          queryCache.invalidateQueries("fetchUsersPosts");
+          queryCache.invalidateQueries("fetchUsersLikes");
+          doToast("Success", "Post succesfully created!");
+          onClose();
+        }
+      }
+    );
+  }
 
   React.useLayoutEffect(() => {
     setPageTitle("Post");
-    document.title = "Buddy | Create Post";
+    document.title = "Buddy | Reply Post";
   }, [setPageTitle]);
-
-  function handleSubmit(values) {
-    mutate(values, {
-      onSuccess: async () => {
-        await queryCache.invalidateQueries("user");
-        doToast("Success", "Post succesfully created!");
-        history.goBack();
-      }
-    });
-  }
-
   return (
     <Modal
-      isOpen={true}
-      onClose={() => history.goBack()}
+      isOpen={isOpen}
+      onClose={onClose}
       overlayClose={true}
       isCentered={false}
       initialFocusRef={focusRef}
       size={{ base: "90%", tablet: "55%", laptop: "530px" }}
-      title="Create Post"
+      title="Reply Post"
     >
+      <PostWrapper>
+        <ImageWrapper>
+          <Avatar src={author?.photo} name={`${author?.firstName} ${author?.lastName}`} />
+        </ImageWrapper>
+
+        <PostDetails>
+          <h3>{`${author?.firstName} ${author?.lastName}` ?? ""}</h3>
+          <PostText>{post?.text}</PostText>
+        </PostDetails>
+      </PostWrapper>
       <Formik
         initialValues={{ post: "" }}
         validationSchema={createPostSchema}
@@ -55,7 +70,7 @@ const CreatePost = () => {
           <Form>
             <TextArea
               name="text"
-              placeholder="Hey! Whats happening........"
+              placeholder="Enter your reply........"
               label=""
               height="12rem"
               tabIndex={0}
@@ -75,4 +90,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default Reply;

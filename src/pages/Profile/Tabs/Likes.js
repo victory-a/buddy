@@ -1,4 +1,5 @@
 import React from "react";
+import { queryCache } from "react-query";
 import { useFetchUsersLiked } from "lib/post-client";
 import { useUserDetails } from "lib/auth-client";
 
@@ -14,7 +15,7 @@ const Likes = () => {
   return status === "success" ? (
     <PostsContainer>
       {likedPosts.map(post => (
-        <Post post={post.post} author={post.author} showStats={false} key={post._id} />
+        <Post post={post.post} author={post.author} showStats={false} key={post._id} liked />
       ))}
     </PostsContainer>
   ) : (

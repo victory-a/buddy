@@ -63,7 +63,7 @@ const Followers = () => {
   const mutualFollowing =
     queryCache
       .getQueryData("following")
-      ?.filter(({ follower }) => follower === user.id)
+      // ?.filter(({ follower }) => follower === user.id)
       ?.map(({ followed }) => followed.id) ?? [];
 
   return status === "success" ? (

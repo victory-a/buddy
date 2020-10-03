@@ -1,8 +1,7 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import { queryCache, useMutation } from "react-query";
-import { useDisclosure, Avatar } from "@chakra-ui/core";
-import { useHistory } from "react-router-dom";
+import { Avatar } from "@chakra-ui/core";
 
 import { replyPost } from "lib/post-client";
 import useCustomToast from "hooks/useCustomToast";
@@ -38,7 +37,7 @@ const Reply = ({ isOpen, onClose, author, post }) => {
   }
 
   React.useLayoutEffect(() => {
-    setPageTitle("Post");
+    // setPageTitle("Reply Post");
     document.title = "Buddy | Reply Post";
   }, [setPageTitle]);
   return (

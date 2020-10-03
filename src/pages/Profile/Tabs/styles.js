@@ -104,8 +104,6 @@ const InsightGroup = styled.span`
   }
 `;
 
-// const
-
 export {
   PostsContainer,
   PostWrapper,

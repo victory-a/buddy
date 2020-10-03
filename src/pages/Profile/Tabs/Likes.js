@@ -1,5 +1,4 @@
 import React from "react";
-import { queryCache } from "react-query";
 import { useFetchUsersLiked } from "lib/post-client";
 import { useUserDetails } from "lib/auth-client";
 

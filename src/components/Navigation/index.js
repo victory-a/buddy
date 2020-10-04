@@ -13,7 +13,6 @@ import Drawer, { useDrawer } from "components/Drawer";
 
 import maleFB from "assets/male-fb.svg";
 import femaleFB from "assets/female-fb.svg";
-import { ReactComponent as Logo } from "assets/logo.svg";
 
 import {
   NavListContainer,
@@ -35,7 +34,9 @@ const MainNav = () => {
     <NavListContainer>
       <NavLogoContainer>
         <Link to="/">
-          <Logo />
+          <span role="img" aria-label="product logo">
+            <span className="text">Buddy</span>✌🏽
+          </span>
         </Link>
       </NavLogoContainer>
 

@@ -80,11 +80,22 @@ const NavLogoContainer = styled.div`
   margin-bottom: 1rem;
   justify-content: center;
   margin: 2rem 0 4rem 0;
+  font-weight: bold;
 
   svg {
     width: 4rem;
     height: auto;
     fill: transparent;
+  }
+
+  & .text {
+    @media ${device.mobile} {
+      display: none;
+    }
+
+    @media ${device.tablet} {
+      display: initial;
+    }
   }
 
   @media ${device.laptop} {

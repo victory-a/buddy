@@ -38,8 +38,9 @@ const NavigationWrapper = styled.div`
 const MainContentWrapper = styled.div`
   flex: 1;
   max-height: 100vh;
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
   border-left: 0.5px solid rgba(18, 39, 140, 0.1);
+  /* position: relative; */
   overflow-y: scroll;
   scroll-behavior: smooth;
 `;

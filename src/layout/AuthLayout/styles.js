@@ -51,11 +51,13 @@ const Container = styled.div`
   }
 `;
 
-const Logo = styled.h1`
+const Logo = styled.div`
   color: ${colors.primary};
   font-size: 2.8rem;
   font-weight: bold;
   text-align: center;
+  display: inline;
+  outline: none;
 
   @media ${device.tablet} {
     text-align: left;

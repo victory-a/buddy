@@ -18,12 +18,15 @@ const AuthLayout = ({ children }) => {
       <BackgroundContainer2 />
       <BackgroundContainer3 />
       <Container>
-        <Link to="/">
-          <Logo>Logo</Logo>
-        </Link>
+        <Logo>
+          <Link to="/">
+            <span role="img" aria-label="buddylogo">
+              Buddy✌🏽
+            </span>
+          </Link>
+        </Logo>
 
         <AuthFormContainer>
-          {/* <img src={friends} alt="" /> */}
           <section>{children}</section>
         </AuthFormContainer>
       </Container>

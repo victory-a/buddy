@@ -110,4 +110,5 @@ export const FollowingButton = styled(Button)`
     height: 100%;
   }
 `;
+
 export default Button;

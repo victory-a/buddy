@@ -3,7 +3,6 @@ import { queryCache } from "react-query";
 import { Avatar, Box, useDisclosure, Tooltip } from "@chakra-ui/core";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsReplyFill } from "react-icons/bs";
-import { useUserDetails } from "lib/auth-client";
 
 import { useLikePost, useUnlikePost } from "lib/post-client";
 
@@ -37,7 +36,7 @@ const Post = ({ post, author, likedByUser, showStats = true }) => {
 
   return (
     <PostWrapper>
-      <Reply isOpen={isOpen} onClose={onClose} author={author} post={post} />
+      {isOpen ? <Reply isOpen={isOpen} onClose={onClose} author={author} post={post} /> : null}
       <ImageWrapper>
         <Avatar src={author?.photo} name={`${author?.firstName} ${author?.lastName}`} />
       </ImageWrapper>

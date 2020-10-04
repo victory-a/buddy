@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ReactQueryDevtools } from "react-query-devtools";
+// import { ReactQueryDevtools } from "react-query-devtools";
 import { ReactQueryConfigProvider } from "react-query";
 import GlobalStyles from "styles";
 import styles from "styles/theme";
@@ -19,7 +19,7 @@ const queryConfig = {
 
 ReactDOM.render(
   <>
-    <ReactQueryDevtools initialIsOpen={false} />
+    {/* <ReactQueryDevtools initialIsOpen={false} /> */}
 
     <ReactQueryConfigProvider config={queryConfig}>
       <GlobalStyles />

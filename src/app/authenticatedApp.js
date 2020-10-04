@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import ProtectedRoute from "routes/ProtectedRoute";
 import routesList from "routes/routesList";
-import ErrorBoundary from "../components/ErrorBoundary";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import AppLayout from "layout/AppLayout";
 import SkeletonLoader from "components/loaders.js/SkeletonLoader";
 

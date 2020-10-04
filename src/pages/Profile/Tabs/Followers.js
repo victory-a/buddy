@@ -9,7 +9,7 @@ import { FollowersButton } from "components/Button";
 import { PostSkeleton } from "components/loaders.js/SkeletonLoader";
 import { PostsContainer, PostWrapper, ImageWrapper2, PostDetails, PostText } from "./styles";
 
-const FollowersUser = ({ user, following = false }) => {
+export const FollowersUser = ({ user, following = false }) => {
   const [followMutation] = useFollow();
   const [unfollowMutation] = useUnfollow();
 

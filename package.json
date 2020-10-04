@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "emotion-theming": "^10.0.27",
     "formik": "2.1.4",
+    "fuse.js": "^6.4.1",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",

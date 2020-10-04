@@ -51,7 +51,7 @@ const Container = styled.div`
   }
 `;
 
-const Logo = styled.image`
+const Logo = styled.div`
   color: ${colors.primary};
   font-size: 2.8rem;
   font-weight: bold;

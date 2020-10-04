@@ -1,14 +1,80 @@
 import React from "react";
-import { usePageDetails } from "layout/AppLayout";
+import { queryCache } from "react-query";
+import { useUsers } from "lib/user-client";
+import Fuse from "fuse.js";
 
-const Transfer = () => {
-  const { setPageTitle } = usePageDetails();
+import { usePageDetails, NonMobileScreen } from "layout/AppLayout";
+import Search from "components/Search";
+
+import { PageTitleWrapper, PostsContainer } from "./styles";
+import { FollowersUser } from "pages/Profile/Tabs/Followers";
+import { PostSkeleton } from "components/loaders.js/SkeletonLoader";
+
+const Users = () => {
+  const { pageTitle, setPageTitle } = usePageDetails();
+  const [usersList, setUserList] = React.useState([]);
+  const [searchTerm, setSearchTerm] = React.useState("");
+
+  const [users, status] = useUsers({
+    onSuccess: data => {
+      setUserList(data);
+    }
+  });
+
+  const mutualFollowing =
+    queryCache
+      .getQueryData("following")
+      // ?.filter(({ follower }) => follower === user.id)
+      ?.map(({ followed }) => followed.id) ?? [];
 
   React.useLayoutEffect(() => {
-    setPageTitle("Send Money");
-    document.title = "Buddy | Send Money";
+    setPageTitle("Users");
+    document.title = "Buddy | Users";
   }, [setPageTitle]);
-  return <div>Users</div>;
+
+  React.useEffect(() => {
+    const fuse = new Fuse(users, {
+      keys: ["email", "firstName", "lastName"]
+    });
+
+    const searchString = searchTerm.trim();
+    const results = fuse.search(searchString).map(({ item }) => item);
+
+    if (results.length > 0) {
+      setUserList(results);
+    } else {
+      setUserList(users);
+    }
+  }, [searchTerm, users]);
+
+  return (
+    <>
+      <NonMobileScreen>
+        <PageTitleWrapper>
+          <p>{pageTitle}</p>
+        </PageTitleWrapper>
+      </NonMobileScreen>
+
+      <Search
+        placeholder="search by email, first or last name"
+        value={searchTerm}
+        onChange={({ target }) => setSearchTerm(target.value)}
+      />
+      {status === "success" ? (
+        <PostsContainer>
+          {usersList?.map(user => (
+            <FollowersUser
+              user={user}
+              key={`users-${user.id}`}
+              following={mutualFollowing.includes(user.id)}
+            />
+          ))}
+        </PostsContainer>
+      ) : (
+        <PostSkeleton />
+      )}
+    </>
+  );
 };
 
-export default Transfer;
+export default Users;

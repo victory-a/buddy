@@ -15,6 +15,15 @@ async function saveImageToCloudinary(payload) {
   return file;
 }
 
+function useUsers() {
+  const { data, status, error } = useQuery({
+    queryKey: "getAllUsers",
+    queryFn: () => client("users").then(data => data.data)
+  });
+  let users = data ?? [];
+  return [users, status, error];
+}
+
 function getFollowers(userId) {
   return client(`users/${userId}/followers`).then(data => data.data);
 }
@@ -47,4 +56,12 @@ function useFollow() {
   return useMutation(userId => client(`users/follow/${userId}`, { method: "PUT" }));
 }
 
-export { updateUser, saveImageToCloudinary, useFollowers, useFollowing, useFollow, useUnfollow };
+export {
+  useUsers,
+  updateUser,
+  saveImageToCloudinary,
+  useFollowers,
+  useFollowing,
+  useFollow,
+  useUnfollow
+};

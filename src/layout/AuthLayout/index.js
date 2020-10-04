@@ -27,7 +27,6 @@ const AuthLayout = ({ children }) => {
         </Logo>
 
         <AuthFormContainer>
-          {/* <img src={friends} alt="" /> */}
           <section>{children}</section>
         </AuthFormContainer>
       </Container>

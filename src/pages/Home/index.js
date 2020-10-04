@@ -2,7 +2,7 @@ import React from "react";
 import { queryCache, useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
 import { Editable, EditableInput, EditablePreview, Avatar, Tooltip } from "@chakra-ui/core";
-import { usePageDetails } from "layout/AppLayout";
+import { usePageDetails, NonMobileScreen } from "layout/AppLayout";
 import { useUserDetails } from "lib/auth-client";
 import { useFetchPosts, useFetchUsersLiked } from "lib/post-client";
 import useLikedPosts from "hooks/userLikedPosts";
@@ -29,7 +29,7 @@ const Home = () => {
   const [textValue, setTextValue] = React.useState("");
   const { pageTitle, setPageTitle } = usePageDetails();
   const { data: posts, status } = useFetchPosts();
-  const [mutate, { error }] = useMutation(createPost);
+  const [mutate] = useMutation(createPost);
 
   const userLikedPosts = useLikedPosts();
 
@@ -61,15 +61,17 @@ const Home = () => {
 
   return (
     <>
-      <PageTitleWrapper>
-        <p>{pageTitle}</p>
-      </PageTitleWrapper>
+      <NonMobileScreen>
+        <PageTitleWrapper>
+          <p>{pageTitle}</p>
+        </PageTitleWrapper>
+      </NonMobileScreen>
 
       <CreatePostWrapper>
         <AvatarContainer onClick={() => push("profile")}>
           <Avatar src={user?.photo} name={`${user?.firstName} ${user?.lastName}`} />
         </AvatarContainer>
-        <Editable w="100%" height="2sm" placeholder="What's on your mind">
+        <Editable w="100%" height="2sm" placeholder="What's on your mind" onSubmit={handleSend}>
           <EditablePreview py={1} />
           <EditableInput
             py={1}

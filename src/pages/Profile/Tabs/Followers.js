@@ -9,7 +9,7 @@ import { FollowersButton } from "components/Button";
 import { PostSkeleton } from "components/loaders.js/SkeletonLoader";
 import { PostsContainer, PostWrapper, ImageWrapper2, PostDetails, PostText } from "./styles";
 
-export const FollowersUser = ({ user, following = false }) => {
+export const FollowersUser = ({ user, following = false, disabled = false }) => {
   const [followMutation] = useFollow();
   const [unfollowMutation] = useUnfollow();
 
@@ -28,6 +28,7 @@ export const FollowersUser = ({ user, following = false }) => {
         queryCache.invalidateQueries("followers");
         queryCache.invalidateQueries("following");
         queryCache.invalidateQueries("user");
+        queryCache.invalidateQueries("getAllUsers");
       }
     });
   }
@@ -41,14 +42,16 @@ export const FollowersUser = ({ user, following = false }) => {
       <PostDetails>
         <Flex justify="space-between" width="100%">
           <h3>{`${user.firstName} ${user.lastName}`}</h3>
-          <FollowersButton
-            following={following}
-            onClick={() => {
-              return following ? handleUnfollow() : handleFollow();
-            }}
-          >
-            {following ? "" : "follow"}
-          </FollowersButton>
+          {!disabled ? (
+            <FollowersButton
+              following={following}
+              onClick={() => {
+                return following ? handleUnfollow() : handleFollow();
+              }}
+            >
+              {following ? "" : "follow"}
+            </FollowersButton>
+          ) : null}
         </Flex>
         <PostText>{user.bio}</PostText>
       </PostDetails>

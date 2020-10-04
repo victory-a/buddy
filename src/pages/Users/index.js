@@ -3,6 +3,7 @@ import { queryCache } from "react-query";
 import { useUsers } from "lib/user-client";
 import Fuse from "fuse.js";
 
+import { useUserDetails } from "lib/auth-client";
 import { usePageDetails, NonMobileScreen } from "layout/AppLayout";
 import Search from "components/Search";
 
@@ -12,6 +13,7 @@ import { PostSkeleton } from "components/loaders.js/SkeletonLoader";
 
 const Users = () => {
   const { pageTitle, setPageTitle } = usePageDetails();
+  const { user } = useUserDetails();
   const [usersList, setUserList] = React.useState([]);
   const [searchTerm, setSearchTerm] = React.useState("");
 
@@ -22,10 +24,7 @@ const Users = () => {
   });
 
   const mutualFollowing =
-    queryCache
-      .getQueryData("following")
-      // ?.filter(({ follower }) => follower === user.id)
-      ?.map(({ followed }) => followed.id) ?? [];
+    queryCache.getQueryData("following")?.map(({ followed }) => followed.id) ?? [];
 
   React.useLayoutEffect(() => {
     setPageTitle("Users");
@@ -62,11 +61,12 @@ const Users = () => {
       />
       {status === "success" ? (
         <PostsContainer>
-          {usersList?.map(user => (
+          {usersList?.map(eachUser => (
             <FollowersUser
-              user={user}
-              key={`users-${user.id}`}
-              following={mutualFollowing.includes(user.id)}
+              user={eachUser}
+              key={`users-${eachUser.id}`}
+              following={mutualFollowing.includes(eachUser.id)}
+              disabled={eachUser.id === user.id}
             />
           ))}
         </PostsContainer>
